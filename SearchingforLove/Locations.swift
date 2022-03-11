@@ -9,19 +9,13 @@ import Foundation
 
 
 
-class Locations : Monsters
+class Locations
 {
     var locationName = ""
-    
-    init( nameOfMonster : String , power : Double ,locationname : String, abilityToAttack : Double  , damageTaken : Double , healthPoint : Double)
+    let monsters : Monsters
+    init(locationName : String, monster : Monsters)
     {
-        super.init()
-        super.name = nameOfMonster
-        super.attackPower = power
-        super.maxHealthPoint = healthPoint
-        super.abilityToAttack = abilityToAttack
-        super.damageTaken = damageTaken
-        self.locationName = locationname
-    
+        self.locationName = locationName
+        self.monsters = monster
     }
 }
