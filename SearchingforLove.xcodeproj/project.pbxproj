@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		123C145327D1C9A8009C4DD3 /* Road.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123C145227D1C9A8009C4DD3 /* Road.swift */; };
+		123C145527D1DC5A009C4DD3 /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123C145427D1DC5A009C4DD3 /* Fight.swift */; };
+		1241C72827CDE3C600769DC0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1241C72727CDE3C600769DC0 /* main.swift */; };
+		126494B627D9C3F800985103 /* roadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126494B527D9C3F800985103 /* roadType.swift */; };
+		12D2AB6C27CEA51E003DE120 /* GameCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2AB6B27CEA51D003DE120 /* GameCharacter.swift */; };
+		12D2AB6E27CEA5EA003DE120 /* Heroes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2AB6D27CEA5EA003DE120 /* Heroes.swift */; };
+		12D2AB7027CEA69C003DE120 /* Monsters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2AB6F27CEA69C003DE120 /* Monsters.swift */; };
+		12EEA9AC27D093DA00251253 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EEA9AB27D093DA00251253 /* Locations.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1241C72227CDE3C600769DC0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		123C145227D1C9A8009C4DD3 /* Road.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Road.swift; sourceTree = "<group>"; };
+		123C145427D1DC5A009C4DD3 /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
+		1241C72427CDE3C600769DC0 /* SearchingforLove */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SearchingforLove; sourceTree = BUILT_PRODUCTS_DIR; };
+		1241C72727CDE3C600769DC0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		126494B527D9C3F800985103 /* roadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roadType.swift; sourceTree = "<group>"; };
+		12D2AB6B27CEA51D003DE120 /* GameCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCharacter.swift; sourceTree = "<group>"; };
+		12D2AB6D27CEA5EA003DE120 /* Heroes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heroes.swift; sourceTree = "<group>"; };
+		12D2AB6F27CEA69C003DE120 /* Monsters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monsters.swift; sourceTree = "<group>"; };
+		12EEA9AB27D093DA00251253 /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1241C72127CDE3C600769DC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1241C71B27CDE3C600769DC0 = {
+			isa = PBXGroup;
+			children = (
+				1241C72627CDE3C600769DC0 /* SearchingforLove */,
+				1241C72527CDE3C600769DC0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1241C72527CDE3C600769DC0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1241C72427CDE3C600769DC0 /* SearchingforLove */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1241C72627CDE3C600769DC0 /* SearchingforLove */ = {
+			isa = PBXGroup;
+			children = (
+				1241C72727CDE3C600769DC0 /* main.swift */,
+				12D2AB6B27CEA51D003DE120 /* GameCharacter.swift */,
+				12D2AB6D27CEA5EA003DE120 /* Heroes.swift */,
+				12D2AB6F27CEA69C003DE120 /* Monsters.swift */,
+				12EEA9AB27D093DA00251253 /* Locations.swift */,
+				123C145227D1C9A8009C4DD3 /* Road.swift */,
+				123C145427D1DC5A009C4DD3 /* Fight.swift */,
+				126494B527D9C3F800985103 /* roadType.swift */,
+			);
+			path = SearchingforLove;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1241C72327CDE3C600769DC0 /* SearchingforLove */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1241C72B27CDE3C600769DC0 /* Build configuration list for PBXNativeTarget "SearchingforLove" */;
+			buildPhases = (
+				1241C72027CDE3C600769DC0 /* Sources */,
+				1241C72127CDE3C600769DC0 /* Frameworks */,
+				1241C72227CDE3C600769DC0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SearchingforLove;
+			productName = SearchingforLove;
+			productReference = 1241C72427CDE3C600769DC0 /* SearchingforLove */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1241C71C27CDE3C600769DC0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					1241C72327CDE3C600769DC0 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 1241C71F27CDE3C600769DC0 /* Build configuration list for PBXProject "SearchingforLove" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1241C71B27CDE3C600769DC0;
+			productRefGroup = 1241C72527CDE3C600769DC0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1241C72327CDE3C600769DC0 /* SearchingforLove */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1241C72027CDE3C600769DC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12D2AB7027CEA69C003DE120 /* Monsters.swift in Sources */,
+				126494B627D9C3F800985103 /* roadType.swift in Sources */,
+				123C145527D1DC5A009C4DD3 /* Fight.swift in Sources */,
+				12D2AB6E27CEA5EA003DE120 /* Heroes.swift in Sources */,
+				1241C72827CDE3C600769DC0 /* main.swift in Sources */,
+				123C145327D1C9A8009C4DD3 /* Road.swift in Sources */,
+				12EEA9AC27D093DA00251253 /* Locations.swift in Sources */,
+				12D2AB6C27CEA51E003DE120 /* GameCharacter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1241C72927CDE3C600769DC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1241C72A27CDE3C600769DC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		1241C72C27CDE3C600769DC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NSDU7A5F66;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1241C72D27CDE3C600769DC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NSDU7A5F66;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1241C71F27CDE3C600769DC0 /* Build configuration list for PBXProject "SearchingforLove" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1241C72927CDE3C600769DC0 /* Debug */,
+				1241C72A27CDE3C600769DC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1241C72B27CDE3C600769DC0 /* Build configuration list for PBXNativeTarget "SearchingforLove" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1241C72C27CDE3C600769DC0 /* Debug */,
+				1241C72D27CDE3C600769DC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1241C71C27CDE3C600769DC0 /* Project object */;
+}
