@@ -1,10 +1,3 @@
-//
-//  Road.swift
-//  SearchingforLove
-//
-//  Created by Urja Desai on 04/03/22.
-//
-
 import Foundation
 
 class road

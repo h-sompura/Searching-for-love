@@ -1,10 +1,3 @@
-//
-//  main.swift
-//  SearchingforLove
-//
-//  Created by Urja Desai on 01/03/22.
-//
-
 import Foundation
 
 var isSearched = false
