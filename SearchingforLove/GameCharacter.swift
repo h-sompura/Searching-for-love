@@ -1,10 +1,3 @@
-//
-//  GameCharacter.swift
-//  SearchingforLove
-//
-//  Created by Urja Desai on 02/03/22.
-//
-
 import Foundation
 
 
@@ -16,7 +9,7 @@ class GameCharacter
     var damageTaken = 0
     
     
-    init(_ name : String)
+    init(name:String)
     {
         self.name = name
 
