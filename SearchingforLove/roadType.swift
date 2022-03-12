@@ -1,5 +1,5 @@
 import Foundation
 enum roadType
 {
-    case paved,swampy,mountainous
+    case Paved,Swampy,Mountainous
 }

@@ -1,10 +1,10 @@
 import Foundation
 
-class Monsters : GameCharacter
+class Monster:GameCharacter
 {
    
-    override init(_ names: String) {
-        super.init(names)
+    override init(name: String) {
+        super.init(name: name)
         super.maxHealthPoint = Int.random(in: 30..<50)
         super.abilityToAttack = Int.random(in: 20..<25)
     }

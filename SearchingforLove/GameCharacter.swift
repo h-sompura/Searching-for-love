@@ -9,7 +9,7 @@ class GameCharacter
     var damageTaken = 0
     
     
-    init(_ name : String)
+    init(name:String)
     {
         self.name = name
 

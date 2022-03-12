@@ -1,17 +1,17 @@
 import Foundation
 
-class road
+class Road
 {
     
-    let startingLocation : String
-    let endingLocation : String
-    let road : roadType
+    let startingLocation:String
+    let endingLocation:String
+    let roadType:roadType
     
-    init(_ starting : String , _ ending : String, _ road : roadType)
+    init(startingLocation: String , endingLocation: String, roadType : roadType)
     {
-        self.startingLocation = starting
-        self.endingLocation = ending
-        self.road = road
+        self.startingLocation = startingLocation
+        self.endingLocation = endingLocation
+        self.roadType = roadType
     }
   
     
