@@ -25,12 +25,12 @@ repeat
             if(isSearched)
             {
                 print("already Know the location of astrid")
-               var m1 = Monsters("Xyz")
+                let m1 = Monsters("Xyz")
                 print("main",m1.abilityToAttack)
                 print("main",m1.maxHealthPoint)
-                var l1 = Locations(locationName: "abc",monster: m1)
-               // l1
-                var heroe = Heroes()
+                //let l1 = Locations(locationName: "abc",monster: m1)
+                // l1
+                let heroe = Heroes()
                 print(heroe.name)
                 repeat
                 {
