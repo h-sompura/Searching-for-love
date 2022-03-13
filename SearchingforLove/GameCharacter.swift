@@ -1,28 +1,22 @@
 import Foundation
-
-
 class GameCharacter
 {
-    var name  = ""
-    var maxHealthPoint = 0
-    var abilityToAttack = 0
-    var damageTaken = 0
-    
-    
-    init(name:String)
-    {
-        self.name = name
+    let name:String
+    var maxHealthPoints:Int
+    var damageDealt:Int
 
+    init(name:String) {
+        self.name = name
+        self.maxHealthPoints = 100
+        self.damageDealt = 25
+    }
+
+    func takeDamage(amount : Int) {
+        self.maxHealthPoints = self.maxHealthPoints - amount
     }
     
-    func takeDamage(amt : Int)
-    {
-        
-    }
-    
-    func attack() -> Int
-    {
-        return 0
+    func attack() -> Int {
+        return self.damageDealt
     }
     
 }
