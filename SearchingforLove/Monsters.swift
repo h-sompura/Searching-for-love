@@ -2,18 +2,13 @@ import Foundation
 
 class Monster:GameCharacter
 {
-   
+    let attackPower:Int
+    
     override init(name: String) {
+        self.attackPower = Int.random(in: 20..<40) // less damage power to the monster --> a biased decision to make hero win
         super.init(name: name)
-        super.maxHealthPoint = Int.random(in: 30..<50)
-        super.abilityToAttack = Int.random(in: 20..<25)
+        super.maxHealthPoints = Int.random(in: 10..<75) //giving less HP to Monsters
+        super.damageDealt = attackPower // since a monster can deal a damage of attackPower they have
     }
-   
-    override func takeDamage(amt: Int) {
-        self.maxHealthPoint = maxHealthPoint - amt
-        self.damageTaken = damageTaken + amt
-    }
-    override func attack() -> Int {
-        return self.damageTaken
-    }
+    
 }

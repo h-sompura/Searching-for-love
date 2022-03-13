@@ -1,9 +1,9 @@
 import Foundation
 
 //creating Hero Hugie
-let gameHero = Hero()
+let gameHero = Hero(name: "Hugie")
 print("-------------------------------")
-print("")
+print("") //intro for the game
 print("> \(gameHero.name), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
 print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
 print("")
@@ -24,7 +24,7 @@ let monstersList = [
     Monster(name: "Fetidbrute")
 ]
 
-//creating a list of locations
+//creating a list of locations with a monster associated
 let locationsList = [
     Location(locationName: "Ithaca", monster: monstersList[0]),
     Location(locationName: "Sparta", monster: monstersList[1]),
@@ -98,7 +98,7 @@ repeat
                                 print("Attack")
                                 //gameHero.takeDamage(amt: m1.abilityToAttack)
                                 print("Damage taken",gameHero.attack())
-                                print(gameHero.maxHealthPoint)
+                                print(gameHero.maxHealthPoints)
                                 //m1.takeDamage(amt: gameHero.weaponStrength)
                                 //print(m1.attack())
                             case 2:
