@@ -1,9 +1,14 @@
 import Foundation
 
+func printLineSeperator() {
+    print("")
+    print("-------------------------------")
+    print("")
+}
 //creating Hero Hugie
 let gameHero = Hero(name: "Hugie")
-print("-------------------------------")
-print("") //intro for the game
+printLineSeperator()
+//intro for the game
 print("> \(gameHero.name), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
 print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
 print("")
@@ -11,8 +16,7 @@ print("> Do not worry though! We will help in your quest to save Astrid.")
 print("> We dropped a map next to you which will help with searching for Astrid.")
 print("> Remember! This world is full of monsters which you have to defeat to move forward.")
 print("> Good luck, \(gameHero.name). We hope you succeed in searching for your love! :) ")
-print("")
-print("-------------------------------")
+printLineSeperator()
 
 
 //creating Monsters
@@ -44,39 +48,43 @@ let roadsList = [
 ]
 
 //creating a map using locations list and roads list
-print("")
-let map = Map(locations: locationsList, roads: roadsList)
-print("")
-print("-------------------------------")
-print("")
+let map = Map(locations: locationsList, roads: roadsList, placeAstrid:"Athens")
+printLineSeperator()
 map.printMap()
-print("")
 //this prints the easiest path ---> map.takeJourney(startingLocation: "Ithaca", endingLocation: "Athens")
 
-var isSearched = false
-//By default true to repeat the condition
-var valid = true
+var isAstridFound:Bool = false
+var valid = true //By default true to repeat the condition
+var searchCaseString = "Search for Astrid"
+printLineSeperator()
 repeat
 {
-    print("> What will you do?")
-    if(isSearched == true)
+    print("> \(gameHero.name), what will you do?")
+    if(isAstridFound)
     {
-    print("\t 1. Search for Astrid" + "[Complete!]")
+        searchCaseString = "Search for Astrid [COMPLETE!]"
     }
-    print("\t 1. Search for Astrid")
+    print("\t 1. \(searchCaseString)")
     print("\t 2. Rescue Astrid")
     print("\t 3. Quit")
     let selection = Int(readLine()!)
     switch (selection) {
         case 1:
             print("> Searching for Astrid....")
-            isSearched = true
+            isAstridFound = map.searchAstrid(startingLocation: "Ithaca")
+            if(isAstridFound == false) {
+                print("")
+                print("> Astrid is not on the map!")
+                printLineSeperator()
+            }
+//            map.traverse(startingLocation: "Ithaca")
+
         case 2:
             var giveUp = true
-            print("Rescuing Astrid....")
-            if(isSearched)
+            print("> Rescuing Astrid....")
+            if(isAstridFound)
             {
-                print("already Know the location of astrid")
+                print("> already Know the location of astrid")
 //                let m1 = Monsters(name: "Xyz")
                 //print("main",m1.abilityToAttack)
                 //print("main",m1.maxHealthPoint)
@@ -84,12 +92,12 @@ repeat
                 // l1
                 repeat
                 {
-                    print("Hugie, what move will you make?")
+                    print("> Hugie, what move will you make?")
                     if(true)
                     {
-                    print("1. Attack")
-                    print("2. Sneak")
-                    print("3. Give Up")
+                    print("\t> 1. Attack")
+                    print("\t> 2. Sneak")
+                    print("\t> 3. Give Up")
                     
                     let selection = Int(readLine()!)
                     switch(selection)
@@ -119,7 +127,7 @@ repeat
             print("Please select option 1 from menu and Search For Astrid's Location")
             }
         case 3:
-            print("bye")
+            print("Bye!")
             valid = false // make it false to close the game
             break
         default:
@@ -137,6 +145,3 @@ repeat
 //Road(startingLocation: "Lokris", endingLocation: "Athens", roadType: roadType.Paved),
 //Road(startingLocation: "Salamis", endingLocation: "Athens", roadType: roadType.Paved),
 //Road(startingLocation: "Mycanae", endingLocation: "Athens", roadType: roadType.Paved),
-
-
-
