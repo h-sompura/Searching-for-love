@@ -41,10 +41,10 @@ class Map{
         }
         
         
-        func takeJourney(startingLocation:String, endingLocation:String) {
+    func takeJourney(startingLocation:String, endingLocation:String) -> [String] {
             // 1. Get the current planet that the Ferengi are at
             var currentLocation = startingLocation
-          
+            var outputLocation = [startingLocation]
             while (currentLocation != endingLocation) {
                 
                 // 2. What are the planet's neighbours
@@ -63,72 +63,80 @@ class Map{
                     }
                     // update the current planet
                     currentLocation = nextLocation
+                    outputLocation.append(currentLocation)
                     // search complete
-                    print("The next location to visit is: \(currentLocation)")
+                    //print("The next location to visit is: \(currentLocation)")
                 }
                 else {
                     // neighbours do not exist
                     // - you are at a vertex that has no further nodes beyond it
                     // TODO: What will you do next? unsure
                 }
-                
+               
                 // 4. Repeat this process until you reach the end (ending Point)
             } // while
-            
-            print("Journey complete!")
+            return outputLocation
         } // function
         
-        
-        
-    //    func traverse(startingPoint:Int) {
-    //
-    //        // tracks which nodes we need to visit
-    //        var stackToExplore:[Int] = []
-    //
-    //        // Track which nodes were already visited
-    //        //  - this is necessary when you aren't sure if your graph has loops / cycles
-    //        var visitedNodes:[Int] = []
-    //
-    //
-    //        // indicate where you want to start the traversal from
-    //        // - depending on the graph and your starting point, you may or may not end up visiting all the nodes
-    //        stackToExplore.append(startingPoint)
-    //
-    //        while (stackToExplore.isEmpty == false) {
-    //            // popping a stack means to remove the last item that was added
-    //            let currNode = stackToExplore.removeLast()
-    //
-    //            if (visitedNodes.contains(currNode) == false) {
-    //                // we have not seen this node before
-    //                // so mark it as visited
-    //                visitedNodes.append(currNode)
-    //                print("\(currNode)", terminator: " ")
-    //            }
-    //
-    //            // get neighbours of the current node
-    //            if let neighbours = self.adjacencyList[currNode] {
-    ////                neighbours = self.adjacencyList[currNode]!
-    //
-    //                // iterate through the neighbours and put the unvisited neighbours into the stack
-    //                for neighbour in neighbours {
-    //                    if (visitedNodes.contains(neighbour) == true) {
-    //                        // we've visited this neighbour in the past, so there is no need to examine it again
-    //                        // we've returned back to a node we saw previously
-    //                        continue
-    //                    }
-    //                    else {
-    //                        stackToExplore.append(neighbour)
-    //                    }
-    //                }
-    //            }
-    //            else  {
-    ////                print("\(currNode) does not have an entry in the adjacency list")
-    ////                print("At a terminal node, moving on")
-    //            }
-    //
-    //        }
-    //
-    //    }
+    func searchAstrid(startingLocation:String) -> Bool {
+         var astridFound = false
+         //tracks which nodes we need to visit
+                  var stackToExplore:[String] = []
+                  let locationOfAstrid = self.placeAstridOnMap
+                  // Track which nodes were already visited
+                  //  - this is necessary when you aren't sure if your graph has loops / cycles
+                  var visitedNodes:[String] = []
+      
+      
+                  // indicate where you want to start the traversal from
+                  // - depending on the graph and your starting point, you may or may not end up visiting all the nodes
+                  stackToExplore.append(startingLocation)
+                  
+                  while (stackToExplore.isEmpty == false) {
+                      // popping a stack means to remove the last item that was added
+                      let currNode = stackToExplore.removeLast()
+                     
+                          if (visitedNodes.contains(currNode) == false) {
+                          
+                          // we have not seen this node before
+                          // so mark it as visited
+                          visitedNodes.append(currNode)
+                        }
+                        if let found = locationOfAstrid {
+                          if(visitedNodes.contains(found)){
+                            print("> Searching \(currNode): Astrid found!")
+                            print("")
+                            print("> Astrid is in \(currNode)")
+                            print("")
+                            astridFound = true
+                            break
+                          }
+                        }
+                      print("> Searching \(currNode): Astrid not found, moving to the next city")
+                      // get neighbours of the current node
+                      if let neighbours = self.adjacencyList[currNode] {
+          //                neighbours = self.adjacencyList[currNode]!
+      
+                          // iterate through the neighbours and put the unvisited neighbours into the stack
+                          for neighbour in neighbours {
+                              if (visitedNodes.contains(neighbour.locationName) == true) {
+                                  // we've visited this neighbour in the past, so there is no need to examine it again
+                                  // we've returned back to a node we saw previously
+                                  continue
+                              }
+                              else {
+                                  stackToExplore.append(neighbour.locationName)
+                              }
+                          }
+                      }
+                      else  {
+      //                    print("\(currNode) does not have an entry in the adjacency list")
+      //                    print("At a terminal node, moving on")
+                      }
+      
+                  }
+        return astridFound
+    }
         func printMap() {
             for entry in adjacencyList {
                 let endingLocation = entry.value.map{$0.locationName}
