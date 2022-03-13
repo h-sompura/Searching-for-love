@@ -40,11 +40,18 @@ let roadsList = [
     Road(startingLocation: "Sparta", endingLocation: "Mycanae", roadType: roadType.Swampy),
     Road(startingLocation: "Argos", endingLocation: "Athens", roadType: roadType.Mountainous),
     Road(startingLocation: "Mycanae", endingLocation: "Athens", roadType: roadType.Paved),
-    Road(startingLocation: "Athens", endingLocation: "Athens",roadType: roadType.Paved), //could we change ending to string optional here??***
+    //Road(startingLocation: "Athens", endingLocation: "Athens",roadType: roadType.Paved), //could we change ending to string optional here or do we even need to connect ending location??***
 ]
 
-//TODO: creating a map using locations list and roads list
-
+//creating a map using locations list and roads list
+print("")
+let map = Map(locations: locationsList, roads: roadsList)
+print("")
+print("-------------------------------")
+print("")
+map.printMap()
+print("")
+//this prints the easiest path ---> map.takeJourney(startingLocation: "Ithaca", endingLocation: "Athens")
 
 var isSearched = false
 //By default true to repeat the condition
@@ -119,5 +126,17 @@ repeat
             print("Invalid selection, try again.")
     }
 }while(valid == true)
+
+
+//Roads list for a different map in case we need to show easiest path logic - works yay!
+
+//Road(startingLocation: "Ithaca", endingLocation: "Argos", roadType: roadType.Paved),
+//Road(startingLocation: "Ithaca", endingLocation: "Mycanae", roadType: roadType.Swampy),
+//Road(startingLocation: "Argos", endingLocation: "Lokris", roadType: roadType.Mountainous),
+//Road(startingLocation: "Argos", endingLocation: "Salamis", roadType: roadType.Swampy),
+//Road(startingLocation: "Lokris", endingLocation: "Athens", roadType: roadType.Paved),
+//Road(startingLocation: "Salamis", endingLocation: "Athens", roadType: roadType.Paved),
+//Road(startingLocation: "Mycanae", endingLocation: "Athens", roadType: roadType.Paved),
+
 
 
