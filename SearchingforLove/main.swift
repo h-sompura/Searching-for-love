@@ -103,18 +103,17 @@ repeat
 
                 while(f1.playerHero.maxHealthPoints >= 0 && f1.playerMonster.maxHealthPoints >= 0 && f1.playerMonster.maxHealthPoints >= f1.playerHero.weaponStrength)
                 {
-//                    if(f1.playerMonster.maxHealthPoints >= f1.playerHero.weaponStrength)
-//                    {
-//                        print("Location change")
-//                        f1.playerMonster.maxHealthPoints = 0
-//                    }
+                    if(f1.playerMonster.maxHealthPoints >= f1.playerHero.weaponStrength)
+                    {
+                        print("Location change")
+                        f1.playerMonster.maxHealthPoints = 0
+                    }
                 print("in while")
                 if(turn == 1)
                 {
                         f1.performTurn(abc: action_perform.attack, turn: 1)
-                        print("max point in 1 for monster ",f1.playerMonster.maxHealthPoints)
-                        print("max point in 2  ",f1.playerHero.maxHealthPoints)
-                        turn = 2
+                        print(f1.playerMonster.maxHealthPoints)
+                        print(f1.playerHero.maxHealthPoints)
             
                 }
                 else
