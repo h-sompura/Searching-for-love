@@ -47,15 +47,17 @@ let roadsList = [
     //Road(startingLocation: "Athens", endingLocation: "Athens",roadType: roadType.Paved), //could we change ending to string optional here or do we even need to connect ending location??***
 ]
 
-//creating a map using locations list and roads list
-let map = Map(locations: locationsList, roads: roadsList, placeAstrid:"Athens")
+//creating a map using locations list and roads list with placing Astrid on the map
+let astridOnMap:String? = "Athens"
+let map = Map(locations: locationsList, roads: roadsList, placeAstrid:astridOnMap)
 printLineSeperator()
 map.printMap()
-//this prints the easiest path ---> map.takeJourney(startingLocation: "Ithaca", endingLocation: "Athens")
 
 var isAstridFound:Bool = false
+var isAstridRescued:Bool = false
 var valid = true //By default true to repeat the condition
 var searchCaseString = "Search for Astrid"
+var resuceCaseString = "Rescue Astrid"
 printLineSeperator()
 repeat
 {
@@ -65,7 +67,7 @@ repeat
         searchCaseString = "Search for Astrid [COMPLETE!]"
     }
     print("\t 1. \(searchCaseString)")
-    print("\t 2. Rescue Astrid")
+    print("\t 2. \(resuceCaseString)")
     print("\t 3. Quit")
     let selection = Int(readLine()!)
     switch (selection) {
@@ -84,7 +86,11 @@ repeat
             print("> Rescuing Astrid....")
             if(isAstridFound)
             {
-                print("> already Know the location of astrid")
+                print("> Starting quest")
+                print("> Generating the easiest path to Astrid...")
+                //this prints the easiest path
+                let path = map.takeJourney(startingLocation: "Ithaca", endingLocation: astridOnMap!)
+                print("> Path found. The easiest path to Astrid is: \(path)")
 //                let m1 = Monsters(name: "Xyz")
                 //print("main",m1.abilityToAttack)
                 //print("main",m1.maxHealthPoint)
@@ -114,17 +120,20 @@ repeat
                             case 3:
                                 giveUp = false
                                 print("Monster wins..Hugie Gave up..!!")
-                                print("Game Over")
-                                valid = false
                             default :
                                 print("Default")
+                        }
+                        isAstridRescued = true //TODO: set this to true only if Hero wins
+                        if(isAstridRescued){
+                            resuceCaseString = "Rescue Astrid [COMPLETE!]"
                         }
                     }
                 }while(giveUp == true)
             }
             else
             {
-            print("Please select option 1 from menu and Search For Astrid's Location")
+            print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
+            printLineSeperator()
             }
         case 3:
             print("Bye!")
