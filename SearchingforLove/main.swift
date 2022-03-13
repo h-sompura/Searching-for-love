@@ -11,7 +11,7 @@ import Foundation
 var turn = 1
 let gameHero = Hero(name: "Hugie")
 print("-------------------------------")
-print("")
+print("") //intro for the game
 print("> \(gameHero.name), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
 print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
 print("")
@@ -52,61 +52,73 @@ let roadsList = [
 ]
 
 //creating a map using locations list and roads list
-let map = Map(locations: locationsList, roads: roadsList, placeAstrid:"Athens")
+print("")
+let map = Map(locations: locationsList, roads: roadsList)
+print("")
+print("-------------------------------")
+print("")
 map.printMap()
+print("")
 //this prints the easiest path ---> map.takeJourney(startingLocation: "Ithaca", endingLocation: "Athens")
 
-
-var isAstridFound:Bool = false
-var searchCaseString = "Search for Astrid"
-
-var valid = true //By default true to repeat the condition
+var isSearched = false
+//By default true to repeat the condition
+var valid = true
 repeat
 {
-    print("Hello..!! Welcome to Searching For Love Game")
-    print("What will you do")
-    if(isAstridFound == true)
+    print("> What will you do?")
+    if(isSearched == true)
     {
-    print("1. Search for Astrid" + "[Complete!]")
+    print("\t 1. Search for Astrid" + "[Complete!]")
     }
-    print("1. Search for Astrid")
-    print("2. Rescue Astrid")
-    print("3. Quit")
+    print("\t 1. Search for Astrid")
+    print("\t 2. Rescue Astrid")
+    print("\t 3. Quit")
     let selection = Int(readLine()!)
     switch (selection) {
         case 1:
-        print("> Searching for Astrid....")
-                   isAstridFound = map.searchAstrid(startingLocation: "Ithaca")
-                   if(isAstridFound == false) {
-                       print("")
-                       print("> Astrid is not on the map!")
-                   }
+            print("> Searching for Astrid....")
+            isSearched = true
         case 2:
+            var giveUp = true
             print("Rescuing Astrid....")
-            if(isAstridFound)
+            if(isSearched)
             {
-                print(locationsList.capacity)
                 print("already Know the location of astrid")
-                
-                var m1 : Location?
-                             for i in locationsList
-                             {
-                                 print("\(i)")
-                                 print(i.monsters.maxHealthPoints)
-                                 m1 = i
-                             }
-                let f1 =  Fight.init(hero: gameHero, monster: m1!.monsters)
-                
-                print("Hero's Max",f1.playerHero.maxHealthPoints)
-                print("Monster's Max",f1.playerMonster.maxHealthPoints)
-                print("hero's wapon",f1.playerHero.weaponStrength)
-
-                while(f1.playerHero.maxHealthPoints >= 0 && f1.playerMonster.maxHealthPoints >= 0 && f1.playerMonster.maxHealthPoints >= f1.playerHero.weaponStrength)
+//                let m1 = Monsters(name: "Xyz")
+                //print("main",m1.abilityToAttack)
+                //print("main",m1.maxHealthPoint)
+                //let l1 = Locations(locationName: "abc",monster: m1)
+                // l1
+                repeat
                 {
-                    if(f1.playerMonster.maxHealthPoints >= f1.playerHero.weaponStrength)
+                    print("Hugie, what move will you make?")
+                    if(true)
                     {
-                        print("Location change")
-                        f1.playerMonster.maxHealthPoints = 0
+                    print("1. Attack")
+                    print("2. Sneak")
+                    print("3. Give Up")
+                    
+                    let selection = Int(readLine()!)
+                    switch(selection)
+                        {
+                            case 1:
+                                print("Attack")
+                                //gameHero.takeDamage(amt: m1.abilityToAttack)
+                                print("Damage taken",gameHero.attack())
+                                print(gameHero.maxHealthPoints)
+                                //m1.takeDamage(amt: gameHero.weaponStrength)
+                                //print(m1.attack())
+                            case 2:
+                                print("Sneak")
+                            case 3:
+                                giveUp = false
+                                print("Monster wins..Hugie Gave up..!!")
+                                print("Game Over")
+                                valid = false
+                            default :
+                                print("Default")
+                        }
                     }
                 print("in while")
                 if(turn == 1)
@@ -163,5 +175,17 @@ repeat
             print("Invalid selection, try again.")
     }
 }while(valid == true)
+
+
+//Roads list for a different map in case we need to show easiest path logic - works yay!
+
+//Road(startingLocation: "Ithaca", endingLocation: "Argos", roadType: roadType.Paved),
+//Road(startingLocation: "Ithaca", endingLocation: "Mycanae", roadType: roadType.Swampy),
+//Road(startingLocation: "Argos", endingLocation: "Lokris", roadType: roadType.Mountainous),
+//Road(startingLocation: "Argos", endingLocation: "Salamis", roadType: roadType.Swampy),
+//Road(startingLocation: "Lokris", endingLocation: "Athens", roadType: roadType.Paved),
+//Road(startingLocation: "Salamis", endingLocation: "Athens", roadType: roadType.Paved),
+//Road(startingLocation: "Mycanae", endingLocation: "Athens", roadType: roadType.Paved),
+
 
 
