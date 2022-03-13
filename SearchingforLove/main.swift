@@ -88,12 +88,14 @@ repeat
                 print(locationsList.capacity)
                 print("already Know the location of astrid")
                 
+                
                 var m1 : Location?
-                             for i in locationsList
-                             {
-                                 print("\(i)")
-                                 print(i.monsters.maxHealthPoints)
-                                 m1 = i
+                repeat{
+                    for i in locationsList
+                    {
+                        print("\(i)")
+                        print(i.monsters.maxHealthPoints)
+                        m1 = i
                              }
                 let f1 =  Fight.init(hero: gameHero, monster: m1!.monsters)
                 
@@ -101,35 +103,56 @@ repeat
                 print("Monster's Max",f1.playerMonster.maxHealthPoints)
                 print("hero's wapon",f1.playerHero.weaponStrength)
 
+                
                 while(f1.playerHero.maxHealthPoints >= 0 && f1.playerMonster.maxHealthPoints >= 0 && f1.playerMonster.maxHealthPoints >= f1.playerHero.weaponStrength)
                 {
-//                    if(f1.playerMonster.maxHealthPoints >= f1.playerHero.weaponStrength)
-//                    {
-//                        print("Location change")
-//                        f1.playerMonster.maxHealthPoints = 0
-//                    }
-                print("in while")
-                if(turn == 1)
+                  
+        
+                    print(f1.turn)
+                    
+                   
+                if(f1.turn == 1)
                 {
                         f1.performTurn(abc: action_perform.attack, turn: 1)
-                        print("max point in 1 for monster ",f1.playerMonster.maxHealthPoints)
-                        print("max point in 2  ",f1.playerHero.maxHealthPoints)
-                        turn = 2
-            
+                        print(f1)
+                    f1.turn = 2
                 }
                 else
                 {
+                
                     f1.performTurn(abc: action_perform.attack, turn: 2)
-                    print("max point in 2  ", f1.playerMonster.maxHealthPoints)
-                    print("max point in 2 for hero",f1.playerHero.maxHealthPoints)
-                    print("in else")
-                    turn = 1
+                    print(f1)
+                    f1.turn = 1
                 }
                 
+                  
+                    if((f1.playerMonster.maxHealthPoints <= f1.playerHero.weaponStrength) == true)
+                    {
+                        print("Location change")
+                        
+                        
+                    }
                 }
-                
-                
-//                var m1 : Location?
+                    
+                }while(locationsList.isEmpty == true)
+            }
+            else
+            {
+            print("Please select option 1 from menu and Search For Astrid's Location")
+            }
+        case 3:
+            print("bye")
+            valid = false // make it false to close the game
+            break
+        default:
+            print("Invalid selection, try again.")
+    }
+}while(valid == true)
+
+
+
+
+////                var m1 : Location?
 //                for i in locationsList
 //                {
 //                    print("\(i)")
@@ -151,18 +174,3 @@ repeat
 //                        turn = 1
 //                    }
 //                }
-            }
-            else
-            {
-            print("Please select option 1 from menu and Search For Astrid's Location")
-            }
-        case 3:
-            print("bye")
-            valid = false // make it false to close the game
-            break
-        default:
-            print("Invalid selection, try again.")
-    }
-}while(valid == true)
-
-
