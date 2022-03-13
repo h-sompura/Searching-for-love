@@ -2,9 +2,11 @@ import Foundation
 
 class Map{
         var adjacencyList:[String:[(locationName:String, roadType:roadType)]] = [:]
-        
-        init(locations:[Location], roads: [Road]) {
+        var placeAstridOnMap:String?
+    
+        init(locations:[Location], roads: [Road], placeAstrid: String?) {
             // build the dictionary (db) of roads & which roads they are connected to
+            self.placeAstridOnMap = placeAstrid ?? nil
             for road in roads {
                 // RECALL: Every edge has a source and destination Node
                 
@@ -147,4 +149,3 @@ class Map{
             }
         }
 }
-

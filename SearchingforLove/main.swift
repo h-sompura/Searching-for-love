@@ -1,17 +1,14 @@
-//
-//  main.swift
-//  SearchingforLove
-//
-//  Created by Urja Desai on 01/03/22.
-//
-
 import Foundation
 
+func printLineSeperator() {
+    print("")
+    print("-------------------------------")
+    print("")
+}
 //creating Hero Hugie
-var turn = 1
 let gameHero = Hero(name: "Hugie")
-print("-------------------------------")
-print("") //intro for the game
+printLineSeperator()
+//intro for the game
 print("> \(gameHero.name), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
 print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
 print("")
@@ -19,8 +16,7 @@ print("> Do not worry though! We will help in your quest to save Astrid.")
 print("> We dropped a map next to you which will help with searching for Astrid.")
 print("> Remember! This world is full of monsters which you have to defeat to move forward.")
 print("> Good luck, \(gameHero.name). We hope you succeed in searching for your love! :) ")
-print("")
-print("-------------------------------")
+printLineSeperator()
 
 
 //creating Monsters
@@ -32,7 +28,7 @@ let monstersList = [
     Monster(name: "Fetidbrute")
 ]
 
-//creating a list of locations
+//creating a list of locations with a monster associated
 let locationsList = [
     Location(locationName: "Ithaca", monster: monstersList[0]),
     Location(locationName: "Sparta", monster: monstersList[1]),
@@ -48,7 +44,7 @@ let roadsList = [
     Road(startingLocation: "Sparta", endingLocation: "Mycanae", roadType: roadType.Swampy),
     Road(startingLocation: "Argos", endingLocation: "Athens", roadType: roadType.Mountainous),
     Road(startingLocation: "Mycanae", endingLocation: "Athens", roadType: roadType.Paved),
-    Road(startingLocation: "Athens", endingLocation: "Athens",roadType: roadType.Paved), //could we change ending to string optional here??***
+    //Road(startingLocation: "Athens", endingLocation: "Athens",roadType: roadType.Paved), //could we change ending to string optional here or do we even need to connect ending location??***
 ]
 
 //creating a map using locations list and roads list with placing Astrid on the map
@@ -65,10 +61,10 @@ var resuceCaseString = "Rescue Astrid"
 printLineSeperator()
 repeat
 {
-    print("> What will you do?")
-    if(isSearched == true)
+    print("> \(gameHero.name), what will you do?")
+    if(isAstridFound)
     {
-    print("\t 1. Search for Astrid" + "[Complete!]")
+        searchCaseString = "Search for Astrid [COMPLETE!]"
     }
     print("\t 1. \(searchCaseString)")
     print("\t 2. \(resuceCaseString)")
@@ -77,11 +73,18 @@ repeat
     switch (selection) {
         case 1:
             print("> Searching for Astrid....")
-            isSearched = true
+            isAstridFound = map.searchAstrid(startingLocation: "Ithaca")
+            if(isAstridFound == false) {
+                print("")
+                print("> Astrid is not on the map!")
+                printLineSeperator()
+            }
+//            map.traverse(startingLocation: "Ithaca")
+
         case 2:
             var giveUp = true
-            print("Rescuing Astrid....")
-            if(isSearched)
+            print("> Rescuing Astrid....")
+            if(isAstridFound)
             {
                 print("> Starting quest")
                 print("> Generating the easiest path to Astrid...")
@@ -95,12 +98,12 @@ repeat
                 // l1
                 repeat
                 {
-                    print("Hugie, what move will you make?")
+                    print("> Hugie, what move will you make?")
                     if(true)
                     {
-                    print("1. Attack")
-                    print("2. Sneak")
-                    print("3. Give Up")
+                    print("\t> 1. Attack")
+                    print("\t> 2. Sneak")
+                    print("\t> 3. Give Up")
                     
                     let selection = Int(readLine()!)
                     switch(selection)
@@ -125,48 +128,7 @@ repeat
                             resuceCaseString = "Rescue Astrid [COMPLETE!]"
                         }
                     }
-                print("in while")
-                if(turn == 1)
-                {
-                        f1.performTurn(abc: action_perform.attack, turn: 1)
-                        print(f1.playerMonster.maxHealthPoints)
-                        print(f1.playerHero.maxHealthPoints)
-            
-                }
-                else
-                {
-                    f1.performTurn(abc: action_perform.attack, turn: 2)
-                    print("max point in 2  ", f1.playerMonster.maxHealthPoints)
-                    print("max point in 2 for hero",f1.playerHero.maxHealthPoints)
-                    print("in else")
-                    turn = 1
-                }
-                
-                }
-                
-                
-//                var m1 : Location?
-//                for i in locationsList
-//                {
-//                    print("\(i)")
-//                    print(i.monsters.maxHealthPoints)
-//                    m1 = i
-//                }
-//                while(m1!.monsters.maxHealthPoints >= 0 && gameHero.maxHealthPoints >= 0)
-//                {
-//                    if turn == 1
-//                    {
-//                        print("hugie's turn")
-//                        m1?.monsters.maxHealthPoints = m1?.monsters.maxHealthPoints ?? 0  - gameHero.weaponStrength
-//                        turn = 2
-//                    }
-//                    else
-//                    {
-//                        print("monster's turn")
-//                        gameHero.maxHealthPoints = gameHero.maxHealthPoints - (m1?.monsters.attackPower)! ?? 0
-//                        turn = 1
-//                    }
-//                }
+                }while(giveUp == true)
             }
             else
             {
@@ -174,7 +136,7 @@ repeat
             printLineSeperator()
             }
         case 3:
-            print("bye")
+            print("Bye!")
             valid = false // make it false to close the game
             break
         default:
@@ -192,6 +154,3 @@ repeat
 //Road(startingLocation: "Lokris", endingLocation: "Athens", roadType: roadType.Paved),
 //Road(startingLocation: "Salamis", endingLocation: "Athens", roadType: roadType.Paved),
 //Road(startingLocation: "Mycanae", endingLocation: "Athens", roadType: roadType.Paved),
-
-
-
