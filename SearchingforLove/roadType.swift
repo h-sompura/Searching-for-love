@@ -6,7 +6,9 @@
 //
 
 import Foundation
-enum roadType
+enum roadType:Int
 {
-    case paved,swampy,mountainous
+    case Paved = 1
+    case Swampy
+    case Mountainous
 }

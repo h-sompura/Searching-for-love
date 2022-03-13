@@ -9,13 +9,27 @@ import Foundation
 
 
 
-class Locations
+class Location
 {
     var locationName = ""
-    let monsters : Monsters
-    init(locationName : String, monster : Monsters)
+    let monsters : Monster
+    init(locationName : String, monster : Monster)
     {
         self.locationName = locationName
         self.monsters = monster
+    }
+    
+    
+    
+}
+
+extension Location : CustomStringConvertible
+{
+    var description: String
+    {
+        get
+        {
+            return monsters.name
+        }
     }
 }

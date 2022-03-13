@@ -8,22 +8,17 @@
 import Foundation
 
 
-class Heroes : GameCharacter
-{
-    var weaponStrength : Int
-    var abilityToSneak : Double
-    
-     init() {
-        self.abilityToSneak = 0.30
-         self.weaponStrength = Int.random(in: 40..<60)
-        super.init("Hugie")
-         super.maxHealthPoint = 100
+import Foundation
+
+class Hero : GameCharacter {
+    let weaponStrength : Int
+    var abilityToSneak : Bool
+
+    override init(name:String) {
+        self.abilityToSneak = false
+        self.weaponStrength = Int.random(in: 35..<40) //we are being biased by giving our hero more weapon strength
+        super.init(name: name)
+        super.damageDealt = self.weaponStrength // since a hero can deal a damage of the weapon strength they are occupied with
     }
-    override func takeDamage(amt: Int) {
-        self.maxHealthPoint = maxHealthPoint - amt
-        self.damageTaken = damageTaken + amt
-    }
-    override func attack() -> Int {
-        return self.damageTaken
-    }
+
 }
