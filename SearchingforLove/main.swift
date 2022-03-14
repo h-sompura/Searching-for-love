@@ -11,20 +11,20 @@ let gameHero = Hero(name: "Hugie")
 printLineSeperator()
 
 //intro for the game
-print("> \(gameHero), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
-sleep(1)
-print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
-print("")
-sleep(1)
-print("> Do not worry though! We will help in your quest to save Astrid.")
-sleep(1)
-print("> We dropped a map next to you which will help with searching for Astrid.")
-sleep(1)
-print("> Remember! This world is full of monsters which you have to defeat to move forward.")
-sleep(1)
-print("> Good luck, \(gameHero). We hope you succeed in searching for your love! :) ")
-printLineSeperator()
-sleep(1)
+//print("> \(gameHero), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
+//sleep(1)
+//print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
+//print("")
+//sleep(1)
+//print("> Do not worry though! We will help in your quest to save Astrid.")
+//sleep(1)
+//print("> We dropped a map next to you which will help with searching for Astrid.")
+//sleep(1)
+//print("> Remember! This world is full of monsters which you have to defeat to move forward.")
+//sleep(1)
+//print("> Good luck, \(gameHero). We hope you succeed in searching for your love! :) ")
+//printLineSeperator()
+//sleep(1)
 
 //creating Monsters
 let monstersList = [
@@ -60,9 +60,9 @@ let astridOnMap:String? = "Athens" // we can also choose not to place Astrid on 
 //creating a map using locations list and roads list with placing Astrid on the map
 let map = Map(locations: locationsList, roads: roadsList, placeAstrid:astridOnMap)
 printLineSeperator()
-sleep(1)
-map.printMap()
-sleep(1)
+//sleep(1)
+//map.printMap()
+//sleep(1)
 var isAstridFound:Bool = false
 var isAstridRescued:Bool = false
 
@@ -116,7 +116,7 @@ repeat
             if(isAstridFound)
             {
                 //placing Hugie on a random location on the map
-                let hugieOnMap = locationsList[Int.random(in: 0..<locationsList.count)]
+                var hugieOnMap = locationsList[Int.random(in: 0..<locationsList.count)]
                 
                 print("> \(gameHero), looks like you are at \(hugieOnMap.locationName)! ")
                 sleep(1)
@@ -124,10 +124,32 @@ repeat
                 
                 //print the easiest path
                 //starting location to take journey will be where Hugie is
-                let path = map.takeJourney(startingLocation: hugieOnMap.locationName, endingLocation: astridOnMap!)
+                var path = map.takeJourney(startingLocation: hugieOnMap.locationName, endingLocation: astridOnMap!)
                 
                 print("> Path found. The easiest path to Astrid is: \(path)")
                 printLineSeperator()
+                
+                print(hugieOnMap)
+                printLineSeperator()
+                
+                while(path.isEmpty == false) {
+                    
+                    let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
+                    
+                    print(fight)
+                    path.removeFirst()
+                    
+                    let nextLocation = path.first
+                    
+                    if let i = locationsList.firstIndex(where: { $0.locationName == nextLocation }){
+                        hugieOnMap = locationsList[i]
+                    } else {
+                        break
+                    }
+                    
+                    print(hugieOnMap)
+                    printLineSeperator()
+                }
                 
                 isAstridRescued = true //TODO: set this to true only if Hero wins
                         

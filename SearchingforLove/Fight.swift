@@ -3,9 +3,10 @@ enum action {
     case attack
     case sneak
 }
-class Fight {
+class Fight:CustomStringConvertible {
     let playerHero:Hero
     let playerMonster:Monster
+    let currentTurn: Int = 1
     
     init(hero:Hero, monster:Monster) {
         self.playerHero = hero
@@ -18,5 +19,21 @@ class Fight {
     }
     func performTurn(kind:action) {
         //TODO: assign action to characters
+    }
+    private func characterHealthStatus(character:GameCharacter) -> String {
+            return "\(character.name)'s HP: \(character.maxHealthPoints) \n"
+    }
+}
+
+extension Fight {
+    var description: String {
+        get {
+            return "Fight Begins! \n" +
+            "\n" +
+            "----TURN #\(self.currentTurn) ---- \n" +
+            "> \(characterHealthStatus(character: playerHero))" +
+            "> \(characterHealthStatus(character: playerMonster))" +
+            "\n"
+        }
     }
 }
