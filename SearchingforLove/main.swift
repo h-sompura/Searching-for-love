@@ -11,20 +11,20 @@ let gameHero = Hero(name: "Hugie")
 printLineSeperator()
 
 //intro for the game
-//print("> \(gameHero), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
-//sleep(1)
-//print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
-//print("")
-//sleep(1)
-//print("> Do not worry though! We will help in your quest to save Astrid.")
-//sleep(1)
-//print("> We dropped a map next to you which will help with searching for Astrid.")
-//sleep(1)
-//print("> Remember! This world is full of monsters which you have to defeat to move forward.")
-//sleep(1)
-//print("> Good luck, \(gameHero). We hope you succeed in searching for your love! :) ")
-//printLineSeperator()
-//sleep(1)
+print("> \(gameHero), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
+sleep(1)
+print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
+print("")
+sleep(1)
+print("> Do not worry though! We will help in your quest to save Astrid.")
+sleep(1)
+print("> We dropped a map next to you which will help with searching for Astrid.")
+sleep(1)
+print("> Remember! This world is full of monsters which you have to defeat to move forward.")
+sleep(1)
+print("> Good luck, \(gameHero). We hope you succeed in searching for your love! :) ")
+printLineSeperator()
+sleep(1)
 
 //creating Monsters
 let monstersList = [
@@ -60,9 +60,9 @@ let astridOnMap:String? = "Athens" // we can also choose not to place Astrid on 
 //creating a map using locations list and roads list with placing Astrid on the map
 let map = Map(locations: locationsList, roads: roadsList, placeAstrid:astridOnMap)
 printLineSeperator()
-//sleep(1)
-//map.printMap()
-//sleep(1)
+sleep(1)
+map.printMap()
+sleep(1)
 var isAstridFound:Bool = false
 var isAstridRescued:Bool = false
 
@@ -132,11 +132,35 @@ repeat
                 print(hugieOnMap)
                 printLineSeperator()
                 
-                while(path.isEmpty == false) {
+                var giveUp = false
+                while(path.isEmpty == false && giveUp == false) {
                     
                     let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
-                    
                     print(fight)
+                    
+                    
+                    print("> \(gameHero), what move will you make?")
+                    print("\t> 1. Attack")
+                    print("\t> 2. Sneak")
+                    print("\t> 3. Give Up")
+                    
+                    let selection = Int(readLine()!)
+                    switch(selection)
+                    {
+                            case 1:
+                                //print("Attack")
+                                fight.performTurn(kind: .attack)
+                                print(fight)
+                            case 2:
+                                print("Sneak")
+                            case 3:
+                                giveUp = true
+                                isAstridRescued = false
+                                print("> Monster wins... You gave up on rescuing Astrid!")
+                                break
+                            default :
+                                print("> Invalid option, try again!")
+                    }
                     path.removeFirst()
                     
                     let nextLocation = path.first
@@ -150,8 +174,6 @@ repeat
                     print(hugieOnMap)
                     printLineSeperator()
                 }
-                
-                isAstridRescued = true //TODO: set this to true only if Hero wins
                         
                 if(isAstridRescued){
                             resuceCaseString = "Rescue Astrid [COMPLETE!]"

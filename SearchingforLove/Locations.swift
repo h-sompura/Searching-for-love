@@ -15,7 +15,8 @@ class Location:CustomStringConvertible
 extension Location {
     var description: String {
         get {
-            return "Arrived at \(locationName). \n \t \(monster) is waiting to fight!"
+            return "ARRIVED AT \(locationName). \n \t \(monster) IS WAITING TO FIGHT! \n" +
+                "\t FIGHT BEGINS! \n"
         }
     }
 }
