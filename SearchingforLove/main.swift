@@ -96,7 +96,8 @@ repeat
         
         case 1:
             print("> Searching for Astrid....")
-            
+            sleep(1)
+        
             //start search for Astrid from Ithaca
             //& store the return value in a bool var
             isAstridFound = map.searchAstrid(startingLocation: "Ithaca")
@@ -115,15 +116,20 @@ repeat
             //only start the rescue if Astrid was found on map
             if(isAstridFound)
             {
-                print("> Starting quest")
-                print("> Generating the easiest path to Astrid...")
+                //placing Hugie on a random location on the map
+                let hugieOnMap = locationsList[Int.random(in: 0..<locationsList.count)].locationName
+                
+                print("> \(gameHero.name), looks like you are at \(hugieOnMap)! ")
+                sleep(1)
+                print("> Generating the easiest path to Astrid from \(hugieOnMap)...")
                 
                 //print the easiest path
-                //TODO: starting location to take journey will be where Hugie is
-                let path = map.takeJourney(startingLocation: "Sparta", endingLocation: astridOnMap!)
+                //starting location to take journey will be where Hugie is
+                let path = map.takeJourney(startingLocation: hugieOnMap, endingLocation: astridOnMap!)
                 
                 print("> Path found. The easiest path to Astrid is: \(path)")
-
+                printLineSeperator()
+                
                 repeat
                 {
                     print("> \(gameHero.name), what move will you make?")
