@@ -5,19 +5,26 @@ func printLineSeperator() {
     print("-------------------------------")
     print("")
 }
+
 //creating Hero Hugie
 let gameHero = Hero(name: "Hugie")
 printLineSeperator()
+
 //intro for the game
-print("> \(gameHero.name), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
+print("> \(gameHero), it is the day before your wedding. You are very much excited to be getting married to the love of your life, Astrid.")
+sleep(1)
 print("  But wait... a little birdy informs you that an evil wizard has kidnapped Astrid and fled to a castle somewhere far away and unknown.")
 print("")
+sleep(1)
 print("> Do not worry though! We will help in your quest to save Astrid.")
+sleep(1)
 print("> We dropped a map next to you which will help with searching for Astrid.")
+sleep(1)
 print("> Remember! This world is full of monsters which you have to defeat to move forward.")
-print("> Good luck, \(gameHero.name). We hope you succeed in searching for your love! :) ")
+sleep(1)
+print("> Good luck, \(gameHero). We hope you succeed in searching for your love! :) ")
 printLineSeperator()
-
+sleep(1)
 
 //creating Monsters
 let monstersList = [
@@ -47,18 +54,30 @@ let roadsList = [
     //Road(startingLocation: "Athens", endingLocation: "Athens",roadType: roadType.Paved), //could we change ending to string optional here or do we even need to connect ending location??***
 ]
 
+
+let astridOnMap:String? = "Athens" // we can also choose not to place Astrid on map --> nil, could be randomized later ***
+
 //creating a map using locations list and roads list with placing Astrid on the map
-let astridOnMap:String? = "Athens"
 let map = Map(locations: locationsList, roads: roadsList, placeAstrid:astridOnMap)
 printLineSeperator()
+sleep(1)
 map.printMap()
-
+sleep(1)
 var isAstridFound:Bool = false
 var isAstridRescued:Bool = false
-var valid = true //By default true to repeat the condition
+
+var runningGame = true //By default true to repeat the game options
+
+/*
+ strings used to display game options;
+ declared mutable because has to be updated
+ when the search/rescue is completed
+*/
 var searchCaseString = "Search for Astrid"
 var resuceCaseString = "Rescue Astrid"
+
 printLineSeperator()
+
 repeat
 {
     print("> \(gameHero.name), what will you do?")
@@ -66,39 +85,59 @@ repeat
     {
         searchCaseString = "Search for Astrid [COMPLETE!]"
     }
+    
     print("\t 1. \(searchCaseString)")
     print("\t 2. \(resuceCaseString)")
     print("\t 3. Quit")
-    let selection = Int(readLine()!)
+    
+    let selection = Int(readLine()!) //take input from the player
+    
     switch (selection) {
+        
         case 1:
             print("> Searching for Astrid....")
+            sleep(1)
+        
+            //start search for Astrid from Ithaca
+            //& store the return value in a bool var
             isAstridFound = map.searchAstrid(startingLocation: "Ithaca")
+            
             if(isAstridFound == false) {
                 print("")
                 print("> Astrid is not on the map!")
                 printLineSeperator()
             }
-//            map.traverse(startingLocation: "Ithaca")
 
         case 2:
             var giveUp = true
+            
             print("> Rescuing Astrid....")
+            
+            //only start the rescue if Astrid was found on map
             if(isAstridFound)
             {
-                print("> Starting quest")
-                print("> Generating the easiest path to Astrid...")
-                //this prints the easiest path
-                let path = map.takeJourney(startingLocation: "Ithaca", endingLocation: astridOnMap!)
+                //placing Hugie on a random location on the map
+                let hugieOnMap = locationsList[Int.random(in: 0..<locationsList.count)]
+                
+                print("> \(gameHero), looks like you are at \(hugieOnMap.locationName)! ")
+                sleep(1)
+                print("> Generating the easiest path to Astrid from \(hugieOnMap.locationName)...")
+                
+                //print the easiest path
+                //starting location to take journey will be where Hugie is
+                let path = map.takeJourney(startingLocation: hugieOnMap.locationName, endingLocation: astridOnMap!)
+                
                 print("> Path found. The easiest path to Astrid is: \(path)")
-//                let m1 = Monsters(name: "Xyz")
-                //print("main",m1.abilityToAttack)
-                //print("main",m1.maxHealthPoint)
-                //let l1 = Locations(locationName: "abc",monster: m1)
-                // l1
+                printLineSeperator()
+                
+                
                 repeat
                 {
-                    print("> Hugie, what move will you make?")
+                 
+                    print(hugieOnMap)
+                    printLineSeperator()
+                    
+                    print("> \(gameHero), what move will you make?")
                     if(true)
                     {
                     print("\t> 1. Attack")
@@ -110,11 +149,10 @@ repeat
                         {
                             case 1:
                                 print("Attack")
-                                //gameHero.takeDamage(amt: m1.abilityToAttack)
+
                                 print("Damage taken",gameHero.attack())
                                 print(gameHero.maxHealthPoints)
-                                //m1.takeDamage(amt: gameHero.weaponStrength)
-                                //print(m1.attack())
+
                             case 2:
                                 print("Sneak")
                             case 3:
@@ -128,7 +166,7 @@ repeat
                             resuceCaseString = "Rescue Astrid [COMPLETE!]"
                         }
                     }
-                }while(giveUp == true)
+                }while(hugieOnMap.locationName != astridOnMap)
             }
             else
             {
@@ -137,12 +175,12 @@ repeat
             }
         case 3:
             print("Bye!")
-            valid = false // make it false to close the game
+            runningGame = false //end the game
             break
         default:
             print("Invalid selection, try again.")
     }
-}while(valid == true)
+}while(runningGame == true)
 
 
 //Roads list for a different map in case we need to show easiest path logic - works yay!

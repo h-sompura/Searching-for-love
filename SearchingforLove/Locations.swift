@@ -1,8 +1,6 @@
 import Foundation
 
-
-
-class Location
+class Location:CustomStringConvertible
 {
     let locationName:String
     let monster:Monster
@@ -11,5 +9,13 @@ class Location
     {
         self.locationName = locationName
         self.monster = monster
+    }
+}
+
+extension Location {
+    var description: String {
+        get {
+            return "Arrived at \(locationName). \n \t \(monster) is waiting to fight!"
+        }
     }
 }
