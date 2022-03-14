@@ -107,9 +107,8 @@ repeat
                 print("> Astrid is not on the map!")
                 printLineSeperator()
             }
-
+            break
         case 2:
-            var giveUp = true
             
             print("> Rescuing Astrid....")
             
@@ -130,49 +129,18 @@ repeat
                 print("> Path found. The easiest path to Astrid is: \(path)")
                 printLineSeperator()
                 
-                
-                repeat
-                {
-                 
-                    print(hugieOnMap)
-                    printLineSeperator()
-                    
-                    print("> \(gameHero), what move will you make?")
-                    if(true)
-                    {
-                    print("\t> 1. Attack")
-                    print("\t> 2. Sneak")
-                    print("\t> 3. Give Up")
-                    
-                    let selection = Int(readLine()!)
-                    switch(selection)
-                        {
-                            case 1:
-                                print("Attack")
-
-                                print("Damage taken",gameHero.attack())
-                                print(gameHero.maxHealthPoints)
-
-                            case 2:
-                                print("Sneak")
-                            case 3:
-                                giveUp = false
-                                print("Monster wins..Hugie Gave up..!!")
-                            default :
-                                print("Default")
-                        }
-                        isAstridRescued = true //TODO: set this to true only if Hero wins
-                        if(isAstridRescued){
+                isAstridRescued = true //TODO: set this to true only if Hero wins
+                        
+                if(isAstridRescued){
                             resuceCaseString = "Rescue Astrid [COMPLETE!]"
-                        }
-                    }
-                }while(hugieOnMap.locationName != astridOnMap)
+                }
             }
             else
             {
-            print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
-            printLineSeperator()
+                print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
+                printLineSeperator()
             }
+            break
         case 3:
             print("Bye!")
             runningGame = false //end the game
