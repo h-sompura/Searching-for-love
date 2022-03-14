@@ -1,5 +1,5 @@
 import Foundation
-class GameCharacter
+class GameCharacter:CustomStringConvertible
 {
     let name:String
     var maxHealthPoints:Int
@@ -19,4 +19,11 @@ class GameCharacter
         return self.damageDealt
     }
     
+}
+extension GameCharacter {
+    var description: String {
+        get {
+            return "\(name)"
+        }
+    }
 }
