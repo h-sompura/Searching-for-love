@@ -6,7 +6,6 @@ enum action {
 class Fight:CustomStringConvertible {
     let playerHero:Hero
     let playerMonster:Monster
-    let currentTurn: Int = 1
     
     init(hero:Hero, monster:Monster) {
         self.playerHero = hero
@@ -30,7 +29,6 @@ extension Fight {
         get {
             return "Fight Begins! \n" +
             "\n" +
-            "----TURN #\(self.currentTurn) ---- \n" +
             "> \(characterHealthStatus(character: playerHero))" +
             "> \(characterHealthStatus(character: playerMonster))" +
             "\n"
