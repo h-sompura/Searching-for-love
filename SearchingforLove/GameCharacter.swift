@@ -7,7 +7,7 @@ class GameCharacter
 
     init(name:String) {
         self.name = name
-        self.maxHealthPoints = 100
+        self.maxHealthPoints = 50 
         self.damageDealt = 25
     }
 
