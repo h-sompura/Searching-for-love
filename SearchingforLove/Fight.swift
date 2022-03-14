@@ -22,29 +22,28 @@ class Fight : CustomStringConvertible{
     init(hero: Hero, monster:Monster) {
         self.playerHero = hero
         self.playerMonster = monster
-        print(hero.name)
-        print(monster.name)
+        //self.turn = 1
+
 
     }
     
     private func applyDamage(from:GameCharacter, to:GameCharacter) {
         let attackDamage = from.damageDealt
         to.maxHealthPoints = to.maxHealthPoints - attackDamage
+        
     }
-    func performTurn(abc : action_perform , turn : Int ) {
+    func performTurn(abc : action_perform ) {
         //TODO: assign action to characters
         switch(abc)
         {
         case .attack:
-                if(turn == 1)
+            if(self.turn == 1)
                 {
                     self.applyDamage(from: self.playerHero, to: self.playerMonster)
-                    //self.turn = 2
                     
                 }
             else
             {
-                print("monster is attackinG")
                 self.applyDamage(from: self.playerMonster, to: self.playerHero)
                 //self.turn = 1
             }
@@ -62,11 +61,17 @@ extension Fight
             if(self.turn == 1)
             {
                 turn = "Current Turn is :\(self.playerHero.name)"
+                return "\(turn), \n  \(self.playerHero.name)'s Health Point : \(self.playerHero.maxHealthPoints) \n \(self.playerMonster.name)'s health point \(self.playerMonster.maxHealthPoints)  "
+
             }
             else
             {
                 turn = "Current Turn is :\(self.playerMonster.name)"
+                return "\(turn), \n  \(self.playerHero.name)'s Health Point : \(self.playerHero.maxHealthPoints) \n \(self.playerMonster.name)'s health point \(self.playerMonster.maxHealthPoints)  "
+
+                
             }
-        return "\(turn), \n  \(self.playerHero.name) : \(self.playerHero.maxHealthPoints)"
+       
+       
        }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 //creating Hero Hugie
-var turn = 1
+//var turn = 1
 let gameHero = Hero(name: "Hugie")
 print("-------------------------------")
 print("")
@@ -23,6 +23,8 @@ print("")
 print("-------------------------------")
 
 
+var found_astrid = ""
+var indexNum : Int = 0
 //creating Monsters
 let monstersList = [
     Monster(name: "Mistflayer"),
@@ -69,7 +71,10 @@ repeat
     {
     print("1. Search for Astrid" + "[Complete!]")
     }
+    else
+    {
     print("1. Search for Astrid")
+    }
     print("2. Rescue Astrid")
     print("3. Quit")
     let selection = Int(readLine()!)
@@ -77,9 +82,11 @@ repeat
         case 1:
         print("> Searching for Astrid....")
                    isAstridFound = map.searchAstrid(startingLocation: "Ithaca")
+        
                    if(isAstridFound == false) {
                        print("")
                        print("> Astrid is not on the map!")
+                       
                    }
         case 2:
             print("Rescuing Astrid....")
@@ -87,54 +94,76 @@ repeat
             {
                 print(locationsList.capacity)
                 print("already Know the location of astrid")
-                
-                
-                var m1 : Location?
-                repeat{
-                    for i in locationsList
-                    {
-                        print("\(i)")
-                        print(i.monsters.maxHealthPoints)
-                        m1 = i
-                             }
-                let f1 =  Fight.init(hero: gameHero, monster: m1!.monsters)
-                
-                print("Hero's Max",f1.playerHero.maxHealthPoints)
-                print("Monster's Max",f1.playerMonster.maxHealthPoints)
-                print("hero's wapon",f1.playerHero.weaponStrength)
-
-                
-                while(f1.playerHero.maxHealthPoints >= 0 && f1.playerMonster.maxHealthPoints >= 0 && f1.playerMonster.maxHealthPoints >= f1.playerHero.weaponStrength)
-                {
-                  
         
-                    print(f1.turn)
-                    
-                   
-                if(f1.turn == 1)
+                while(gameHero.maxHealthPoints >= 0)
                 {
-                        f1.performTurn(abc: action_perform.attack, turn: 1)
+                    print(indexNum)
+                    let f1 = Fight(hero: gameHero, monster: locationsList[indexNum].monsters)
                         print(f1)
-                    f1.turn = 2
-                }
-                else
-                {
-                
-                    f1.performTurn(abc: action_perform.attack, turn: 2)
-                    print(f1)
-                    f1.turn = 1
-                }
-                
-                  
-                    if((f1.playerMonster.maxHealthPoints <= f1.playerHero.weaponStrength) == true)
-                    {
-                        print("Location change")
-                        
-                        
+                        if(f1.turn == 1)
+                        {
+                            print("hugies's turn")
+                            print("What will you do HUgie")
+                            print("1. Attack")
+                            print("2. Sneak")
+                            print("3. Give Up")
+                            var Hugie_selection = Int(readLine()!)
+                            switch(Hugie_selection)
+                            {
+                            case 1:
+                                print("attack")
+                                if(f1.playerMonster.maxHealthPoints >= 0)
+                                {
+                                    if(f1.playerMonster.maxHealthPoints < f1.playerHero.weaponStrength)
+                                    {
+                                        print("Huggie won Moving to next Location")
+                                        if(locationsList.count > indexNum)
+                                        {
+                                            print("Hugies won Yeahhh Found Astrid")
+                                            valid = false
+                                            Hugie_selection = 4
+                                        }
+                                       indexNum = indexNum + 1
+                                    }
+                                    else
+                                    {
+                                    f1.performTurn(abc: action_perform.attack)
+                                    print(f1)
+                                    }
+                                }
+                                else
+                                {
+                                    print("in ")
+                                    if(locationsList.count > indexNum)
+                                    {
+                                        print("Hugies won Yeahhh Found Astrid")
+                                        valid = false
+                                        Hugie_selection = 4
+                                    }
+                                    indexNum = indexNum + 1
+                                    print("abc",indexNum)
+                                }
+                            case 2:
+                                print("sneak")
+                            case 3:
+                                print("give up")
+                            default :
+                                print("please enter valid")
+                            }
+                            f1.turn = 2
+                        }
+                        else
+                        {
+                            print("monster;s turn")
+                            f1.performTurn(abc: action_perform.attack)
+                            print(f1)
+                            f1.turn = 1
+                        }
                     }
-                }
-                    
-                }while(locationsList.isEmpty == true)
+                
+                   
+              
+                
             }
             else
             {
@@ -142,7 +171,7 @@ repeat
             }
         case 3:
             print("bye")
-            valid = false // make it false to close the game
+            valid = false // make it false to close the   game
             break
         default:
             print("Invalid selection, try again.")
