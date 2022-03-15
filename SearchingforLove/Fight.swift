@@ -26,8 +26,8 @@ class Fight: CustomStringConvertible {
   }
   
     private func calculateCriticalHit() -> Int {
-        let randomPercentage = Double.random(in: 0.0...1)
-        if(randomPercentage < 0.3){
+        let randomPercentage = Int.random(in: 1...10)
+        if(randomPercentage <= 3){
             print("> Critical Hit ***")
             return playerHero.damageDealt*(Int(Double(playerHero.damageDealt)*0.2))
         }
@@ -35,8 +35,8 @@ class Fight: CustomStringConvertible {
     }
     
     private func calculateMissDamage() -> Int{
-        let randomPercentage = Double.random(in: 0.0...1)
-        if(randomPercentage < 0.2){
+        let randomPercentage = Int.random(in:1...10)
+        if(randomPercentage <= 2){
             print("> \(playerMonster.name) misses ***")
             playerMonster.damageDealt = 0
             return playerMonster.damageDealt
