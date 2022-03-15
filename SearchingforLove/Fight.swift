@@ -34,12 +34,13 @@ class Fight: CustomStringConvertible {
         currentPlayer = playerMonster.name
         turn += 1
       } else {
-        //monster attacks
+        //monster is the current player
         applyDamage(from: playerMonster, to: playerHero)
         currentPlayer = playerHero.name
         turn += 1
       }
-
+    case .runAway:
+        print("> You gave up on saving Astrid \n\n")
     default:
       print("something else is happening")
     }

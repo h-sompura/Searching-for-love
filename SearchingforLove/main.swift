@@ -138,10 +138,10 @@ repeat {
 
         let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
         print(fight)
-
-        while fight.playerMonster.maxHealthPoints > 0 {
-
+        while fight.playerMonster.maxHealthPoints > 0 && giveUp == false {
+            
           if fight.currentPlayer == gameHero.name {
+            //hero's turn
             print("> \(gameHero), what move will you make?")
             print("\t> 1. Attack")
             print("\t> 2. Sneak")
@@ -156,22 +156,26 @@ repeat {
             case 2:
               print("Sneak")
             case 3:
+              fight.performTurn(kind: .runAway)
               giveUp = true
               isAstridRescued = false
-              print("> Monster wins... You gave up on rescuing Astrid!")
-              break
+              continue
             default:
               print("> Invalid option, try again!")
             }
           } else {
+            //monster's turm
             fight.performTurn(kind: .attack)
-
           }
           print(fight)
         }
-
-        print("> \(hugieOnMap.monster) was defeated! \n")
-        isAstridRescued = true
+        
+        if(isAstridRescued){
+            print("> \(hugieOnMap.monster) was defeated! \n")
+            resuceCaseString = "Rescue Astrid [COMPLETE!]"
+            isAstridRescued = true
+        }
+          
         path.removeFirst()
 
         let nextLocation = path.first
@@ -181,14 +185,12 @@ repeat {
         } else {
           break
         }
-
-        printLineSeperator()
-        print(hugieOnMap)
-        printLineSeperator()
-      }
-
-      if isAstridRescued {
-        resuceCaseString = "Rescue Astrid [COMPLETE!]"
+        
+        if(!giveUp){
+            printLineSeperator()
+            print(hugieOnMap)
+            printLineSeperator()
+        }
       }
     } else {
       print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
