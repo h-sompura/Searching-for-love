@@ -138,29 +138,40 @@ repeat
                     let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
                     print(fight)
                     
+                    while(fight.playerMonster.maxHealthPoints > 0){
                     
-                    print("> \(gameHero), what move will you make?")
-                    print("\t> 1. Attack")
-                    print("\t> 2. Sneak")
-                    print("\t> 3. Give Up")
-                    
-                    let selection = Int(readLine()!)
-                    switch(selection)
-                    {
-                            case 1:
-                                //print("Attack")
-                                fight.performTurn(kind: .attack)
-                                print(fight)
-                            case 2:
-                                print("Sneak")
-                            case 3:
-                                giveUp = true
-                                isAstridRescued = false
-                                print("> Monster wins... You gave up on rescuing Astrid!")
-                                break
-                            default :
-                                print("> Invalid option, try again!")
+                    if(fight.currentPlayer == gameHero.name){
+                        print("> \(gameHero), what move will you make?")
+                        print("\t> 1. Attack")
+                        print("\t> 2. Sneak")
+                        print("\t> 3. Give Up")
+                        
+                        let selection = Int(readLine()!)
+                        switch(selection)
+                        {
+                                case 1:
+                                    //print("Attack")
+                                    fight.performTurn(kind: .attack)
+                                case 2:
+                                    print("Sneak")
+                                case 3:
+                                    giveUp = true
+                                    isAstridRescued = false
+                                    print("> Monster wins... You gave up on rescuing Astrid!")
+                                    break
+                                default :
+                                    print("> Invalid option, try again!")
+                        }
                     }
+                        else{
+                            fight.performTurn(kind: .attack)
+                            
+                        }
+                        print(fight)
+                    }
+                    
+                    print("> \(hugieOnMap.monster) was defeated! \n")
+                    isAstridRescued = true
                     path.removeFirst()
                     
                     let nextLocation = path.first
@@ -171,6 +182,7 @@ repeat
                         break
                     }
                     
+                    printLineSeperator()
                     print(hugieOnMap)
                     printLineSeperator()
                 }

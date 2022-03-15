@@ -7,24 +7,38 @@ enum action {
 class Fight:CustomStringConvertible {
     let playerHero:Hero
     let playerMonster:Monster
-    let turn:Int = 1
+    var turn:Int = 1
+    var currentPlayer:String
     
     init(hero:Hero, monster:Monster) {
         self.playerHero = hero
         self.playerMonster = monster
+        self.currentPlayer = hero.name
     }
     
     private func applyDamage(from:GameCharacter, to:GameCharacter) {
+        if(to.maxHealthPoints > 0){
         let attackDamage = from.damageDealt
         print("> \(from.name) attacks: \(attackDamage) damage")
         to.maxHealthPoints = to.maxHealthPoints - attackDamage
+        }
     }
     func performTurn(kind:action) {
         //assign action to characters
         switch(kind)
         {
         case .attack:
-            applyDamage(from: playerHero, to: playerMonster)
+            if(currentPlayer.contains(playerHero.name)){
+                applyDamage(from: playerHero, to: playerMonster)
+                currentPlayer = playerMonster.name
+                turn += 1
+            } else {
+                //monster attacks
+                applyDamage(from: playerMonster, to: playerHero)
+                currentPlayer = playerHero.name
+                turn += 1
+            }
+            
         default:
             print("something else is happening")
         }
@@ -37,11 +51,15 @@ class Fight:CustomStringConvertible {
 extension Fight {
     var description: String {
         get {
-            return "\n" +
-            "----TURN #\(turn) ---- \n" +
-            "> \(characterHealthStatus(character: playerHero))" +
-            "> \(characterHealthStatus(character: playerMonster))" +
-            "\n"
+            if(playerMonster.maxHealthPoints > 0){
+                return "\n" +
+                "----TURN #\(turn) ---- \n" +
+                "> Current Turn: \(currentPlayer) \n" +
+                "> \(characterHealthStatus(character: playerHero))" +
+                "> \(characterHealthStatus(character: playerMonster))" +
+                "\n"
+            }
+            return "\n"
         }
     }
 }
