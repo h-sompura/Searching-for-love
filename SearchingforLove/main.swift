@@ -83,17 +83,22 @@ printLineSeperator()
 
 repeat {
   print("> \(gameHero.name), what will you do?")
+  
   if isAstridFound {
     searchCaseString = "Search for Astrid [COMPLETE!]"
   }
-
+    
+  if isAstridRescued {
+    resuceCaseString = "Rescue Astrid [COMPLETE!]"
+  }
+    
   print("\t 1. \(searchCaseString)")
   print("\t 2. \(resuceCaseString)")
   print("\t 3. Quit")
 
-  let selection = Int(readLine()!)  //take input from the player
+  var playerInput = Int(readLine()!)  //take input from the player
 
-  switch selection {
+  switch playerInput {
 
   case 1:
     print("> Searching for Astrid....")
@@ -110,88 +115,86 @@ repeat {
     }
     break
   case 2:
-
+    
+    var heroGivesUp = false
+    
+    //place Hugie on Map now @ a random location
+    var hugieOnMap = locationsList[Int.random(in: 0..<locationsList.count)]
     print("> Rescuing Astrid....")
 
     //only start the rescue if Astrid was found on map
     if isAstridFound {
-      //placing Hugie on a random location on the map
-      var hugieOnMap = locationsList[Int.random(in: 0..<locationsList.count)]
-
-      print("> \(gameHero), looks like you are at \(hugieOnMap.locationName)! ")
-      sleep(1)
-      print("> Generating the easiest path to Astrid from \(hugieOnMap.locationName)...")
-
-      //print the easiest path
-      //starting location to take journey will be where Hugie is
-      var path = map.takeJourney(
-        startingLocation: hugieOnMap.locationName, endingLocation: astridOnMap!)
-
-      print("> Path found. The easiest path to Astrid is: \(path)")
-      printLineSeperator()
-
-      print(hugieOnMap)
-      printLineSeperator()
-
-      var giveUp = false
-      while path.isEmpty == false && giveUp == false {
-
-        let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
-        print(fight)
-        while fight.playerMonster.maxHealthPoints > 0 && giveUp == false {
+        //generate easiest path from Hugie's location
+        print("> \(gameHero.name), looks like you are at \(hugieOnMap.locationName)")
+        print("> Generating easiest path from your location...")
+        var path = map.takeJourney(startingLocation: hugieOnMap.locationName, endingLocation: astridOnMap!)
+        sleep(1)
+        print("> Path found. The easiest path to Astrid is: \(path)")
+        printLineSeperator()
+        
+        //start journey, visit each location, print location deets
+        //traverse next location only player hasn't given up
+        LOCATION: while path.isEmpty == false && heroGivesUp == false {
             
-          if fight.currentPlayer == gameHero.name {
-            //hero's turn
-            print("> \(gameHero), what move will you make?")
-            print("\t> 1. Attack")
-            print("\t> 2. Sneak")
-            print("\t> 3. Give Up")
-
-            let selection = Int(readLine()!)
-            switch selection
-            {
-            case 1:
-              //print("Attack")
-              fight.performTurn(kind: .attack)
-            case 2:
-              print("Sneak")
-            case 3:
-              fight.performTurn(kind: .runAway)
-              giveUp = true
-              isAstridRescued = false
-              continue
-            default:
-              print("> Invalid option, try again!")
-            }
-          } else {
-            //monster's turm
-            fight.performTurn(kind: .attack)
-          }
-          print(fight)
-        }
-        
-        if(isAstridRescued){
-            print("> \(hugieOnMap.monster) was defeated! \n")
-            resuceCaseString = "Rescue Astrid [COMPLETE!]"
-            isAstridRescued = true
-        }
-          
-        path.removeFirst()
-
-        let nextLocation = path.first
-
-        if let i = locationsList.firstIndex(where: { $0.locationName == nextLocation }) {
-          hugieOnMap = locationsList[i]
-        } else {
-          break
-        }
-        
-        if(!giveUp){
-            printLineSeperator()
+            //print Hugie's current location
             print(hugieOnMap)
             printLineSeperator()
+            
+            //TODO: fight specific output here
+            let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
+            print(fight)
+            
+        FIGHT: while(fight.playerHero.maxHealthPoints > 0 && fight.playerMonster.maxHealthPoints > 0){
+            
+            if(fight.currentPlayer.contains(gameHero.name)){
+                //current player is Hero
+                print("> \(gameHero), what move will you make?")
+                print("\t> 1. Attack")
+                print("\t> 2. Sneak")
+                print("\t> 3. Give Up")
+
+                playerInput = Int(readLine()!)
+                
+                switch playerInput{
+                case 1:
+                    //attack
+                    fight.performTurn(kind: .attack)
+                case 2:
+                    //sneak
+                    fight.performTurn(kind: .sneak)
+                case 3:
+                    //run away
+                    fight.performTurn(kind: .runAway)
+                    heroGivesUp = true
+                    continue LOCATION
+                default:
+                    //invalid
+                    print("> Invalid command, try again!")
+                }
+                
+            } else {
+                //current player is Monster
+                //monster only attacks
+                fight.performTurn(kind: .attack)
+            }
+            print(fight)
         }
-      }
+            
+            //after fight is over & hugie wins, move to next location
+            path.removeFirst()
+            let nextLocation = path.first
+            
+            //find the next location in our loc. list
+            if let foundLocation = locationsList.firstIndex(where: { $0.locationName == nextLocation }) {
+                //next loc. found, hence update hugie's location
+                hugieOnMap = locationsList[foundLocation]
+            } else {
+                //no next loc. found
+                break LOCATION
+            }
+        
+        }
+        
     } else {
       print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
       printLineSeperator()
