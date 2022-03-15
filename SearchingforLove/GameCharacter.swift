@@ -1,29 +1,28 @@
 import Foundation
-class GameCharacter:CustomStringConvertible
-{
-    let name:String
-    var maxHealthPoints:Int
-    var damageDealt:Int
 
-    init(name:String) {
-        self.name = name
-        self.maxHealthPoints = 50 
-        self.damageDealt = 25
-    }
+class GameCharacter: CustomStringConvertible {
+  let name: String
+  var maxHealthPoints: Int
+  var damageDealt: Int
 
-    func takeDamage(amount : Int) {
-        self.maxHealthPoints = self.maxHealthPoints - amount
-    }
-    
-    func attack() -> Int {
-        return self.damageDealt
-    }
-    
+  init(name: String) {
+    self.name = name
+    self.maxHealthPoints = 50
+    self.damageDealt = 25
+  }
+
+  func takeDamage(amount: Int) {
+    self.maxHealthPoints = self.maxHealthPoints - amount
+  }
+
+  func attack() -> Int {
+    return self.damageDealt
+  }
+
 }
 extension GameCharacter {
-    var description: String {
-        get {
-            return "\(name)"
-        }
-    }
+  var description: String {
+    return "\(name)"
+  }
 }
+
