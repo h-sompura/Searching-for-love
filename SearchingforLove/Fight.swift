@@ -21,7 +21,7 @@ class Fight: CustomStringConvertible {
     self.isFightOver = false
     //reset HP
     self.playerHero.maxHealthPoints = playerHero.finalMaxHP
-    self.playerMonster.maxHealthPoints = playerMonster.maxHealthPoints
+    self.playerMonster.maxHealthPoints = playerMonster.finalMaxHP
   }
 
   private func applyDamage(from: GameCharacter, to: GameCharacter) {
