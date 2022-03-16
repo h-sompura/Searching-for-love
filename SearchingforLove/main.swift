@@ -114,6 +114,8 @@ repeat {
     if isAstridFound == false {
       print("")
       print("> Astrid is not on the map!")
+      currentWinner = "> \(gameHero.name) could not find Astrid! You LOSE ***"
+      print("\(currentWinner)")
       printLineSeperator()
     }
     break
