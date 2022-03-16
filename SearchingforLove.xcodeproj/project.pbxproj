@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1206219D27DB611400F874F5 /* map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206219C27DB611400F874F5 /* map.swift */; };
 		123C145327D1C9A8009C4DD3 /* Road.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123C145227D1C9A8009C4DD3 /* Road.swift */; };
 		123C145527D1DC5A009C4DD3 /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123C145427D1DC5A009C4DD3 /* Fight.swift */; };
 		1241C72827CDE3C600769DC0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1241C72727CDE3C600769DC0 /* main.swift */; };
@@ -16,6 +15,7 @@
 		12D2AB6E27CEA5EA003DE120 /* Heroes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2AB6D27CEA5EA003DE120 /* Heroes.swift */; };
 		12D2AB7027CEA69C003DE120 /* Monsters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2AB6F27CEA69C003DE120 /* Monsters.swift */; };
 		12EEA9AC27D093DA00251253 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EEA9AB27D093DA00251253 /* Locations.swift */; };
+		E3C2A64A27DDA6B900B96595 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C2A64927DDA6B900B96595 /* Map.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,7 +31,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1206219C27DB611400F874F5 /* map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = map.swift; sourceTree = "<group>"; };
 		123C145227D1C9A8009C4DD3 /* Road.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Road.swift; sourceTree = "<group>"; };
 		123C145427D1DC5A009C4DD3 /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 		1241C72427CDE3C600769DC0 /* SearchingforLove */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SearchingforLove; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +40,7 @@
 		12D2AB6D27CEA5EA003DE120 /* Heroes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heroes.swift; sourceTree = "<group>"; };
 		12D2AB6F27CEA69C003DE120 /* Monsters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monsters.swift; sourceTree = "<group>"; };
 		12EEA9AB27D093DA00251253 /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
+		E3C2A64927DDA6B900B96595 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 				123C145227D1C9A8009C4DD3 /* Road.swift */,
 				123C145427D1DC5A009C4DD3 /* Fight.swift */,
 				126494B527D9C3F800985103 /* roadType.swift */,
-				1206219C27DB611400F874F5 /* map.swift */,
+				E3C2A64927DDA6B900B96595 /* Map.swift */,
 			);
 			path = SearchingforLove;
 			sourceTree = "<group>";
@@ -144,7 +144,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1206219D27DB611400F874F5 /* map.swift in Sources */,
 				12D2AB7027CEA69C003DE120 /* Monsters.swift in Sources */,
 				126494B627D9C3F800985103 /* roadType.swift in Sources */,
 				123C145527D1DC5A009C4DD3 /* Fight.swift in Sources */,
@@ -152,6 +151,7 @@
 				1241C72827CDE3C600769DC0 /* main.swift in Sources */,
 				123C145327D1C9A8009C4DD3 /* Road.swift in Sources */,
 				12EEA9AC27D093DA00251253 /* Locations.swift in Sources */,
+				E3C2A64A27DDA6B900B96595 /* Map.swift in Sources */,
 				12D2AB6C27CEA51E003DE120 /* GameCharacter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,7 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NSDU7A5F66;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -289,7 +289,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NSDU7A5F66;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
