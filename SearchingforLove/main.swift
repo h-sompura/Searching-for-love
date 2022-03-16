@@ -58,7 +58,7 @@ let roadsList = [
   //Road(startingLocation: "Athens", endingLocation: "Athens",roadType: roadType.Paved), //could we change ending to string optional here or do we even need to connect ending location??***
 ]
 
-let astridOnMap: String? = "Athens"  // we can also choose not to place Astrid on map --> nil, could be randomized later ***
+let astridOnMap: String? = "Athens"  // we can also choose not to place Astrid on map --> nil, could be randomized later *** //TODO: array with possiblities and random 0..<arr.count
 
 //creating a map using locations list and roads list with placing Astrid on the map
 let map = Map(locations: locationsList, roads: roadsList, placeAstrid: astridOnMap)
@@ -148,8 +148,9 @@ repeat {
         //fight specific output here
         let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
         print(fight)
-
-        FIGHT: while fight.playerHero.maxHealthPoints > 0 && fight.playerMonster.maxHealthPoints > 0
+        
+        var trackFight = false
+        FIGHT: while trackFight == false
         {
 
           if fight.currentPlayer.contains(gameHero.name) {
@@ -160,47 +161,45 @@ repeat {
             print("\t> 3. Give Up")
 
             playerInput = Int(readLine()!)
-
+           
             switch playerInput {
             case 1:
               //attack
-              fight.performTurn(kind: .attack)
+              trackFight = fight.performTurn(kind: .attack)
+              print("> In HERO ATTACK: \(trackFight)")
             case 2:
               //sneak
-              fight.performTurn(kind: .sneak)
-              if fight.playerHero.abilityToSneak == true {
-                print("> *** \(gameHero.name) successfully sneaked past", fight.playerMonster.name)
+             trackFight = fight.performTurn(kind: .sneak)
                 printLineSeperator()
-              } else {
-                print(
-                  "> \(gameHero.name), you were not able to sneak past \(fight.playerMonster.name)")
-                print("> *** \(hugieOnMap.monster.name) gobbled you up! *** ")
-                printLineSeperator()
+                print("> In HERO SNEAK: \(trackFight)")
                 break LOCATION
-              }
             case 3:
               //run away
-              fight.performTurn(kind: .runAway)
+              trackFight = fight.performTurn(kind: .runAway)
+                print("> In HERO GIVEUP: \(trackFight)")
               heroGivesUp = true
               continue LOCATION
             default:
               //invalid
               print("> Invalid command, try again!")
             }
-
-          } else {
+          }
+         else {
             //current player is Monster
             //monster only attacks
-            fight.performTurn(kind: .attack)
+            trackFight = fight.performTurn(kind: .attack)
+             print("> In MONSTER ATTACK: \(trackFight)")
           }
           print(fight)
-        }
+        } //FIGHT ENDS
+          
         let fightResult = fight.finalFightStats()
         print(fightResult)
+          
         currentWinner = fight.winner
         if currentWinner == gameHero.name {
           //after fight is over & hugie wins, move to next location
-          isAstridRescued = true
+          //THIS IS WRONG: isAstridRescued = true IF WON && NO LOC.
           path.removeFirst()
           let nextLocation = path.first
 
@@ -211,18 +210,19 @@ repeat {
             hugieOnMap = locationsList[foundLocation]
           } else {
             //no next loc. found
+            isAstridRescued = true
             break LOCATION
           }
         } else {
           isAstridRescued = false
         }
-      }
+      } //LOCATION ENDS
     } else {
       print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
       printLineSeperator()
     }
-    if(currentWinner == gameHero.name){
-    print("> ~~Congratulations! You rescued your love! ~~~")
+    if(isAstridRescued){
+        print("> ~~~ Congratulations! You rescued your love! ~~~")
     }
     break
   case 3:

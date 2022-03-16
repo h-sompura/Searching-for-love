@@ -10,14 +10,15 @@ class Fight: CustomStringConvertible {
   let playerMonster: Monster
   var turn: Int = 1
   var currentPlayer: String
+    var isFightOver: Bool
   var winner: String
 
   init(hero: Hero, monster: Monster) {
     self.playerHero = hero
     self.playerMonster = monster
-    self.currentPlayer = hero.name
+    self.currentPlayer = hero.name  //TODO: EDIT THIS
     self.winner = monster.name
-
+    self.isFightOver = false
     //reset HP
     self.playerHero.maxHealthPoints = playerHero.finalMaxHP
     self.playerMonster.maxHealthPoints = playerMonster.maxHealthPoints
@@ -32,6 +33,13 @@ class Fight: CustomStringConvertible {
       winner = from.name
     }
   }
+    
+    func checkIfCharacterDied(_ character:GameCharacter) -> Bool{
+        if(character.maxHealthPoints <= 0){
+            return true
+        }
+        return false
+    }
 
   private func calculateCriticalHit() -> Int {
     let randomPercentage = Int.random(in: 1...10)
@@ -53,16 +61,17 @@ class Fight: CustomStringConvertible {
     return playerMonster.damageDealt
   }
 
-  func performTurn(kind: action) {
+  func performTurn(kind: action) -> Bool{
     //assign action to characters
+    isFightOver = false
     switch kind
     {
     case .attack:
       if currentPlayer.contains(playerHero.name) {
         let heroDamageDealt = calculateCriticalHit()
         playerHero.damageDealt = heroDamageDealt
-
         applyDamage(from: playerHero, to: playerMonster)
+        isFightOver = checkIfCharacterDied(playerMonster)
         currentPlayer = playerMonster.name
         turn += 1
         winner = playerHero.name
@@ -71,6 +80,7 @@ class Fight: CustomStringConvertible {
         let monsterDamageDealt = calculateMissDamage()
         playerMonster.damageDealt = monsterDamageDealt
         applyDamage(from: playerMonster, to: playerHero)
+        isFightOver = checkIfCharacterDied(playerHero)
         currentPlayer = playerHero.name
         turn += 1
       }
@@ -80,14 +90,22 @@ class Fight: CustomStringConvertible {
       if randomPercentage <= 3 {
         self.playerHero.abilityToSneak = true
         self.playerMonster.maxHealthPoints = 0
+        print("> *** \(playerHero.name) successfully sneaked past \(playerMonster.name)")
+        isFightOver = true
         winner = playerHero.name
       } else {
         self.playerHero.abilityToSneak = false
+        print(
+              "> \(playerHero.name), you were not able to sneak past \(playerMonster.name)")
+        print("> *** \(playerMonster.name) gobbled you up! *** ")
+        isFightOver = false
         self.playerHero.maxHealthPoints = 0
       }
     case .runAway:
       print("> *** You gave up on searching for your love! *** \n")
+      isFightOver = true
     }
+    return isFightOver
   }
   private func characterHealthStatus(character: GameCharacter) -> String {
     return "\(character.name)'s HP: \(character.maxHealthPoints)/\(character.finalMaxHP) \n"
@@ -96,7 +114,7 @@ class Fight: CustomStringConvertible {
   func finalFightStats() -> String {
     return "> *** Phew, the fight is over! *** \n" + "> Final Stats: \n"
       + "> \(characterHealthStatus(character: playerHero))"
-      + "> \(characterHealthStatus(character: playerMonster))" + "> Winner is: \(winner) \n"
+      + "> \(characterHealthStatus(character: playerMonster))"
   }
 }
 
@@ -107,6 +125,6 @@ extension Fight {
         + "> \(characterHealthStatus(character: playerHero))"
         + "> \(characterHealthStatus(character: playerMonster))" + "\n"
     }
-    return "\n"
+    return "> Winner is: \(winner)"
   }
 }
