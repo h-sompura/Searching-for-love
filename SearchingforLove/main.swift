@@ -162,6 +162,19 @@ repeat {
                 case 2:
                     //sneak
                     fight.performTurn(kind: .sneak)
+                    if(fight.playerHero.abilityToSneak == true)
+                    {
+                        print("> *** \(gameHero.name) successfully sneaked past", fight.playerMonster.name)
+                        fight.playerMonster.maxHealthPoints = 0
+                        printLineSeperator()
+                    }
+                    else
+                    {
+                    print("> \(gameHero.name) was not able to sneak")
+                    print("> *** \(hugieOnMap.monster.name) gobbled you up! ***")
+                    fight.playerHero.maxHealthPoints = 0
+                    break LOCATION
+                    }
                 case 3:
                     //run away
                     fight.performTurn(kind: .runAway)
@@ -192,7 +205,6 @@ repeat {
                 //no next loc. found
                 break LOCATION
             }
-        
         }
         
     } else {

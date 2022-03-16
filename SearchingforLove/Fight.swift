@@ -20,24 +20,25 @@ class Fight: CustomStringConvertible {
   private func applyDamage(from: GameCharacter, to: GameCharacter) {
     if to.maxHealthPoints > 0 {
       let attackDamage = from.attack()
-      print("> \(from.name) attacks: \(attackDamage) damage")
+      print("> *** \(from.name) attacks: \(attackDamage) damage! ***")
       to.maxHealthPoints = to.maxHealthPoints - attackDamage
     }
   }
   
     private func calculateCriticalHit() -> Int {
         let randomPercentage = Int.random(in: 1...10)
-        if(randomPercentage <= 3){
-            print("> Critical Hit ***")
-            return playerHero.damageDealt*(Int(Double(playerHero.damageDealt)*0.2))
+        if randomPercentage <= 3 {
+            print("> *** Critical Hit ***")
+            let damage = Double(playerHero.damageDealt) * 0.2
+            return Int(damage) + playerHero.damageDealt
         }
         return playerHero.damageDealt
     }
     
     private func calculateMissDamage() -> Int{
         let randomPercentage = Int.random(in:1...10)
-        if(randomPercentage <= 2){
-            print("> \(playerMonster.name) misses ***")
+        if randomPercentage <= 2 {
+            print("> *** \(playerMonster.name) misses ***")
             playerMonster.damageDealt = 0
             return playerMonster.damageDealt
         }
@@ -64,20 +65,29 @@ class Fight: CustomStringConvertible {
         currentPlayer = playerHero.name
         turn += 1
       }
+    case .sneak :
+        print("> *** \(playerHero.name) is sneaking ***")
+          let randomPercentage = Int.random(in:1...10)
+          if(randomPercentage <= 3)
+          {
+              self.playerHero.abilityToSneak = true
+          }
+          else
+          {
+              self.playerHero.abilityToSneak = false
+          }
     case .runAway:
-        print("> You gave up on saving Astrid \n\n")
-    default:
-      print("something else is happening")
+        print("> *** You gave up on searching for your love! *** \n")
     }
   }
   private func characterHealthStatus(character: GameCharacter) -> String {
-    return "\(character.name)'s HP: \(character.maxHealthPoints)/\(character.maxHealthPoints) \n"
+    return "\(character.name)'s HP: \(character.maxHealthPoints)/\(character.finalMaxHP) \n"
   }
 }
 
 extension Fight {
   var description: String {
-    if playerMonster.maxHealthPoints > 0 {
+      if playerMonster.maxHealthPoints > 0 && playerMonster.maxHealthPoints > 0 {
       return "\n" + "----TURN #\(turn) ---- \n" + "> Current Turn: \(currentPlayer) \n"
         + "> \(characterHealthStatus(character: playerHero))"
         + "> \(characterHealthStatus(character: playerMonster))" + "\n"
