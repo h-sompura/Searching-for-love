@@ -4,11 +4,13 @@ class GameCharacter: CustomStringConvertible {
   let name: String
   var maxHealthPoints: Int
   var damageDealt: Int
+  final let finalMaxHP:Int
 
   init(name: String) {
     self.name = name
     self.maxHealthPoints = 50
     self.damageDealt = 25
+    self.finalMaxHP = maxHealthPoints
   }
 
   func takeDamage(amount: Int) {
