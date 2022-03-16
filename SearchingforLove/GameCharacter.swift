@@ -4,7 +4,7 @@ class GameCharacter: CustomStringConvertible {
   let name: String
   var maxHealthPoints: Int
   var damageDealt: Int
-  final var finalMaxHP:Int
+  final var finalMaxHP: Int
 
   init(name: String) {
     self.name = name
@@ -27,4 +27,3 @@ extension GameCharacter {
     return "\(name)"
   }
 }
-

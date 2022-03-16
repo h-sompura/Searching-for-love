@@ -79,19 +79,21 @@ var runningGame = true  //By default true to repeat the game options
 var searchCaseString = "Search for Astrid"
 var resuceCaseString = "Rescue Astrid"
 
+var currentWinner:String = ""
+
 printLineSeperator()
 
 repeat {
   print("> \(gameHero.name), what will you do?")
-  
+
   if isAstridFound {
     searchCaseString = "Search for Astrid [COMPLETE!]"
   }
-    
+
   if isAstridRescued {
     resuceCaseString = "Rescue Astrid [COMPLETE!]"
   }
-    
+
   print("\t 1. \(searchCaseString)")
   print("\t 2. \(resuceCaseString)")
   print("\t 3. Quit")
@@ -115,106 +117,112 @@ repeat {
     }
     break
   case 2:
-    
+
     var heroGivesUp = false
-    
+
     //place Hugie on Map now @ a random location
     var hugieOnMap = locationsList[Int.random(in: 0..<locationsList.count)]
     print("> Rescuing Astrid....")
 
     //only start the rescue if Astrid was found on map
     if isAstridFound {
-        //generate easiest path from Hugie's location
-        print("> \(gameHero.name), looks like you are at \(hugieOnMap.locationName)")
-        print("> Generating the easiest path from your location...")
-        var path = map.takeJourney(startingLocation: hugieOnMap.locationName, endingLocation: astridOnMap!)
-        sleep(1)
-        print("> Path found. The easiest path to Astrid is: \(path)")
-        printLineSeperator()
-        
-        //start journey, visit each location, print location deets
-        //traverse next location only player hasn't given up
-        LOCATION: while path.isEmpty == false && heroGivesUp == false {
-            
-            //print Hugie's current location
-            print(hugieOnMap)
-            printLineSeperator()
-            
-            //TODO: fight specific output here
-            let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
-            print(fight)
-            
-        FIGHT: while(fight.playerHero.maxHealthPoints > 0 && fight.playerMonster.maxHealthPoints > 0){
-            
-            if(fight.currentPlayer.contains(gameHero.name)){
-                //current player is Hero
-                print("> \(gameHero), what move will you make?")
-                print("\t> 1. Attack")
-                print("\t> 2. Sneak")
-                print("\t> 3. Give Up")
+      //generate easiest path from Hugie's location
+      print("> \(gameHero.name), looks like you are at \(hugieOnMap.locationName)")
+      print("> Generating the easiest path from your location...")
+      var path = map.takeJourney(
+        startingLocation: hugieOnMap.locationName, endingLocation: astridOnMap!)
+      sleep(1)
+      print("> Path found. The easiest path to Astrid is: \(path)")
+      printLineSeperator()
 
-                playerInput = Int(readLine()!)
-                
-                switch playerInput{
-                case 1:
-                    //attack
-                    fight.performTurn(kind: .attack)
-                case 2:
-                    //sneak
-                    fight.performTurn(kind: .sneak)
-                    if(fight.playerHero.abilityToSneak == true)
-                    {
-                        print("> *** \(gameHero.name) successfully sneaked past", fight.playerMonster.name)
-                        printLineSeperator()
-                    }
-                    else
-                    {
-                        print("> \(gameHero.name), you were not able to sneak past \(fight.playerMonster.name)")
-                    print("> *** \(hugieOnMap.monster.name) gobbled you up! *** ")
-                    printLineSeperator()
-                    break LOCATION
-                    }
-                case 3:
-                    //run away
-                    fight.performTurn(kind: .runAway)
-                    heroGivesUp = true
-                    continue LOCATION
-                default:
-                    //invalid
-                    print("> Invalid command, try again!")
-                }
-                
-            } else {
-                //current player is Monster
-                //monster only attacks
-                fight.performTurn(kind: .attack)
+      //start journey, visit each location, print location deets
+      //traverse next location only player hasn't given up
+      LOCATION: while path.isEmpty == false && heroGivesUp == false {
+        
+        isAstridRescued = false
+          
+        //print Hugie's current location
+        print(hugieOnMap)
+        printLineSeperator()
+
+        //TODO: fight specific output here
+        let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
+        print(fight)
+
+        FIGHT: while fight.playerHero.maxHealthPoints > 0 && fight.playerMonster.maxHealthPoints > 0
+        {
+
+          if fight.currentPlayer.contains(gameHero.name) {
+            //current player is Hero
+            print("> \(gameHero), what move will you make?")
+            print("\t> 1. Attack")
+            print("\t> 2. Sneak")
+            print("\t> 3. Give Up")
+
+            playerInput = Int(readLine()!)
+
+            switch playerInput {
+            case 1:
+              //attack
+              fight.performTurn(kind: .attack)
+            case 2:
+              //sneak
+              fight.performTurn(kind: .sneak)
+              if fight.playerHero.abilityToSneak == true {
+                print("> *** \(gameHero.name) successfully sneaked past", fight.playerMonster.name)
+                printLineSeperator()
+              } else {
+                print(
+                  "> \(gameHero.name), you were not able to sneak past \(fight.playerMonster.name)")
+                print("> *** \(hugieOnMap.monster.name) gobbled you up! *** ")
+                printLineSeperator()
+                break LOCATION
+              }
+            case 3:
+              //run away
+              fight.performTurn(kind: .runAway)
+              heroGivesUp = true
+              continue LOCATION
+            default:
+              //invalid
+              print("> Invalid command, try again!")
             }
-            print(fight)
+
+          } else {
+            //current player is Monster
+            //monster only attacks
+            fight.performTurn(kind: .attack)
+          }
+          print(fight)
         }
-            let fightResult = fight.finalFightStats()
-            print(fightResult)
-            let currentWinner = fight.winner
-            if(currentWinner == gameHero.name){
-                //after fight is over & hugie wins, move to next location
-                path.removeFirst()
-                let nextLocation = path.first
-                
-                //find the next location in our loc. list
-                if let foundLocation = locationsList.firstIndex(where: { $0.locationName == nextLocation }) {
-                    //next loc. found, hence update hugie's location
-                    hugieOnMap = locationsList[foundLocation]
-                } else {
-                    //no next loc. found
-                    break LOCATION
-                }
-                isAstridRescued = true
-            } else {
-                isAstridRescued = false
-            }
+        let fightResult = fight.finalFightStats()
+        print(fightResult)
+        currentWinner = fight.winner
+        if currentWinner == gameHero.name {
+          //after fight is over & hugie wins, move to next location
+          isAstridRescued = true
+          path.removeFirst()
+          let nextLocation = path.first
+
+          //find the next location in our loc. list
+          if let foundLocation = locationsList.firstIndex(where: { $0.locationName == nextLocation }
+          ) {
+            //next loc. found, hence update hugie's location
+            hugieOnMap = locationsList[foundLocation]
+          } else {
+            //no next loc. found
+            break LOCATION
+          }
+        } else {
+          isAstridRescued = false
         }
+      }
     } else {
       print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
       printLineSeperator()
+    }
+    if(currentWinner == gameHero.name){
+    print("> ~~Congratulations! You rescued your love! ~~~")
     }
     break
   case 3:
