@@ -16,7 +16,7 @@ class Fight: CustomStringConvertible {
   init(hero: Hero, monster: Monster) {
     self.playerHero = hero
     self.playerMonster = monster
-    self.currentPlayer = hero.name  //TODO: EDIT THIS
+    self.currentPlayer = hero.name
     self.winner = monster.name
     self.isFightOver = false
     //reset HP
@@ -114,7 +114,8 @@ class Fight: CustomStringConvertible {
   func finalFightStats() -> String {
     return "> *** Phew, the fight is over! *** \n" + "> Final Stats: \n"
       + "> \(characterHealthStatus(character: playerHero))"
-      + "> \(characterHealthStatus(character: playerMonster))"
+      + "> \(characterHealthStatus(character: playerMonster))" +
+      "> Winner is: \(winner)"
   }
 }
 

@@ -58,7 +58,7 @@ let roadsList = [
   //Road(startingLocation: "Athens", endingLocation: "Athens",roadType: roadType.Paved), //could we change ending to string optional here or do we even need to connect ending location??***
 ]
 
-let astridOnMap: String? = "Athens"  // we can also choose not to place Astrid on map --> nil, could be randomized later *** //TODO: array with possiblities and random 0..<arr.count
+let astridOnMap: String? = "Athens"  // we can also choose not to place Astrid on map --> nil, could be randomized later ***
 
 //creating a map using locations list and roads list with placing Astrid on the map
 let map = Map(locations: locationsList, roads: roadsList, placeAstrid: astridOnMap)
@@ -103,6 +103,7 @@ repeat {
   switch playerInput {
 
   case 1:
+    searchCaseString = "Search for Astrid"
     print("> Searching for Astrid....")
     sleep(1)
 
@@ -117,7 +118,7 @@ repeat {
     }
     break
   case 2:
-
+    resuceCaseString = "Rescue Astrid"
     var heroGivesUp = false
 
     //place Hugie on Map now @ a random location
@@ -166,17 +167,17 @@ repeat {
             case 1:
               //attack
               trackFight = fight.performTurn(kind: .attack)
-              print("> In HERO ATTACK: \(trackFight)")
+              //print("> In HERO ATTACK: \(trackFight)")
             case 2:
               //sneak
              trackFight = fight.performTurn(kind: .sneak)
                 printLineSeperator()
-                print("> In HERO SNEAK: \(trackFight)")
+                //print("> In HERO SNEAK: \(trackFight)")
                 break LOCATION
             case 3:
               //run away
               trackFight = fight.performTurn(kind: .runAway)
-                print("> In HERO GIVEUP: \(trackFight)")
+              //print("> In HERO GIVEUP: \(trackFight)")
               heroGivesUp = true
               continue LOCATION
             default:
@@ -188,7 +189,7 @@ repeat {
             //current player is Monster
             //monster only attacks
             trackFight = fight.performTurn(kind: .attack)
-             print("> In MONSTER ATTACK: \(trackFight)")
+            //print("> In MONSTER ATTACK: \(trackFight)")
           }
           print(fight)
         } //FIGHT ENDS
