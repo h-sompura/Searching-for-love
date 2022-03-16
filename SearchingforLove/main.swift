@@ -79,7 +79,7 @@ var runningGame = true  //By default true to repeat the game options
 var searchCaseString = "Search for Astrid"
 var resuceCaseString = "Rescue Astrid"
 
-var currentWinner:String = ""
+var currentWinner: String = ""
 
 printLineSeperator()
 
@@ -139,9 +139,9 @@ repeat {
       //start journey, visit each location, print location deets
       //traverse next location only player hasn't given up
       LOCATION: while path.isEmpty == false && heroGivesUp == false {
-        
+
         isAstridRescued = false
-          
+
         //print Hugie's current location
         print(hugieOnMap)
         printLineSeperator()
@@ -149,10 +149,9 @@ repeat {
         //fight specific output here
         let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
         print(fight)
-        
+
         var trackFight = false
-        FIGHT: while trackFight == false
-        {
+        FIGHT: while trackFight == false {
 
           if fight.currentPlayer.contains(gameHero.name) {
             //current player is Hero
@@ -162,18 +161,18 @@ repeat {
             print("\t> 3. Give Up")
 
             playerInput = Int(readLine()!)
-           
+
             switch playerInput {
             case 1:
               //attack
               trackFight = fight.performTurn(kind: .attack)
-              //print("> In HERO ATTACK: \(trackFight)")
+            //print("> In HERO ATTACK: \(trackFight)")
             case 2:
               //sneak
-             trackFight = fight.performTurn(kind: .sneak)
-                printLineSeperator()
-                //print("> In HERO SNEAK: \(trackFight)")
-                break LOCATION
+              trackFight = fight.performTurn(kind: .sneak)
+              printLineSeperator()
+              //print("> In HERO SNEAK: \(trackFight)")
+              break LOCATION
             case 3:
               //run away
               trackFight = fight.performTurn(kind: .runAway)
@@ -184,19 +183,18 @@ repeat {
               //invalid
               print("> Invalid command, try again!")
             }
-          }
-         else {
+          } else {
             //current player is Monster
             //monster only attacks
             trackFight = fight.performTurn(kind: .attack)
             //print("> In MONSTER ATTACK: \(trackFight)")
           }
           print(fight)
-        } //FIGHT ENDS
-          
+        }  //FIGHT ENDS
+
         let fightResult = fight.finalFightStats()
         print(fightResult)
-          
+
         currentWinner = fight.winner
         if currentWinner == gameHero.name {
           //after fight is over & hugie wins, move to next location
@@ -217,13 +215,13 @@ repeat {
         } else {
           isAstridRescued = false
         }
-      } //LOCATION ENDS
+      }  //LOCATION ENDS
     } else {
       print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
       printLineSeperator()
     }
-    if(isAstridRescued){
-        print("> ~~~ Congratulations! You rescued your love! ~~~ \n")
+    if isAstridRescued {
+      print("> ~~~ Congratulations! You rescued your love! ~~~ \n")
     }
     break
   case 3:
@@ -244,3 +242,4 @@ repeat {
 //Road(startingLocation: "Lokris", endingLocation: "Athens", roadType: roadType.Paved),
 //Road(startingLocation: "Salamis", endingLocation: "Athens", roadType: roadType.Paved),
 //Road(startingLocation: "Mycanae", endingLocation: "Athens", roadType: roadType.Paved),
+
