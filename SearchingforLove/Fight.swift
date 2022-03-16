@@ -115,7 +115,7 @@ class Fight: CustomStringConvertible {
     return "> *** Phew, the fight is over! *** \n" + "> Final Stats: \n"
       + "> \(characterHealthStatus(character: playerHero))"
       + "> \(characterHealthStatus(character: playerMonster))" +
-      "> Winner is: \(winner)"
+      "> Winner is: \(winner) \n"
   }
 }
 
@@ -126,6 +126,6 @@ extension Fight {
         + "> \(characterHealthStatus(character: playerHero))"
         + "> \(characterHealthStatus(character: playerMonster))" + "\n"
     }
-    return "> Winner is: \(winner)"
+    return "\n"
   }
 }

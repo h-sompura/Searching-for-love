@@ -223,7 +223,7 @@ repeat {
       printLineSeperator()
     }
     if(isAstridRescued){
-        print("> ~~~ Congratulations! You rescued your love! ~~~")
+        print("> ~~~ Congratulations! You rescued your love! ~~~ \n")
     }
     break
   case 3:
