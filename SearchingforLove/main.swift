@@ -145,7 +145,7 @@ repeat {
         print(hugieOnMap)
         printLineSeperator()
 
-        //TODO: fight specific output here
+        //fight specific output here
         let fight = Fight(hero: gameHero, monster: hugieOnMap.monster)
         print(fight)
 
