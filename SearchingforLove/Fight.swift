@@ -10,11 +10,17 @@ class Fight: CustomStringConvertible {
   let playerMonster: Monster
   var turn: Int = 1
   var currentPlayer: String
+  var winner:String
 
   init(hero: Hero, monster: Monster) {
     self.playerHero = hero
     self.playerMonster = monster
     self.currentPlayer = hero.name
+    self.winner = monster.name
+    
+    //reset HP
+    self.playerHero.maxHealthPoints = playerHero.finalMaxHP
+    self.playerMonster.maxHealthPoints = playerMonster.maxHealthPoints
   }
 
   private func applyDamage(from: GameCharacter, to: GameCharacter) {
@@ -22,6 +28,8 @@ class Fight: CustomStringConvertible {
       let attackDamage = from.attack()
       print("> *** \(from.name) attacks: \(attackDamage) damage! ***")
       to.maxHealthPoints = to.maxHealthPoints - attackDamage
+    } else {
+        winner = from.name
     }
   }
   
@@ -57,6 +65,7 @@ class Fight: CustomStringConvertible {
         applyDamage(from: playerHero, to: playerMonster)
         currentPlayer = playerMonster.name
         turn += 1
+        winner = playerHero.name
       } else {
         //monster is the current player
         let monsterDamageDealt = calculateMissDamage()
@@ -71,10 +80,13 @@ class Fight: CustomStringConvertible {
           if(randomPercentage <= 3)
           {
               self.playerHero.abilityToSneak = true
+              self.playerMonster.maxHealthPoints = 0
+              winner = playerHero.name
           }
           else
           {
               self.playerHero.abilityToSneak = false
+              self.playerHero.maxHealthPoints = 0
           }
     case .runAway:
         print("> *** You gave up on searching for your love! *** \n")
@@ -83,6 +95,14 @@ class Fight: CustomStringConvertible {
   private func characterHealthStatus(character: GameCharacter) -> String {
     return "\(character.name)'s HP: \(character.maxHealthPoints)/\(character.finalMaxHP) \n"
   }
+    
+    func finalFightStats() -> String {
+        return "> *** Phew, the fight is over! *** \n" +
+            "> Final Stats: \n" +
+            "> \(characterHealthStatus(character: playerHero)) \n" +
+            "> \(characterHealthStatus(character: playerMonster)) \n" +
+            "> Winner is: \(winner) \n"
+    }
 }
 
 extension Fight {

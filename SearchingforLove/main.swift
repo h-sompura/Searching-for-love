@@ -126,7 +126,7 @@ repeat {
     if isAstridFound {
         //generate easiest path from Hugie's location
         print("> \(gameHero.name), looks like you are at \(hugieOnMap.locationName)")
-        print("> Generating easiest path from your location...")
+        print("> Generating the easiest path from your location...")
         var path = map.takeJourney(startingLocation: hugieOnMap.locationName, endingLocation: astridOnMap!)
         sleep(1)
         print("> Path found. The easiest path to Astrid is: \(path)")
@@ -165,14 +165,13 @@ repeat {
                     if(fight.playerHero.abilityToSneak == true)
                     {
                         print("> *** \(gameHero.name) successfully sneaked past", fight.playerMonster.name)
-                        fight.playerMonster.maxHealthPoints = 0
                         printLineSeperator()
                     }
                     else
                     {
-                    print("> \(gameHero.name) was not able to sneak")
-                    print("> *** \(hugieOnMap.monster.name) gobbled you up! ***")
-                    fight.playerHero.maxHealthPoints = 0
+                        print("> \(gameHero.name), you were not able to sneak past \(fight.playerMonster.name)")
+                    print("> *** \(hugieOnMap.monster.name) gobbled you up! *** ")
+                    printLineSeperator()
                     break LOCATION
                     }
                 case 3:
@@ -192,21 +191,27 @@ repeat {
             }
             print(fight)
         }
-            
-            //after fight is over & hugie wins, move to next location
-            path.removeFirst()
-            let nextLocation = path.first
-            
-            //find the next location in our loc. list
-            if let foundLocation = locationsList.firstIndex(where: { $0.locationName == nextLocation }) {
-                //next loc. found, hence update hugie's location
-                hugieOnMap = locationsList[foundLocation]
+            let fightResult = fight.finalFightStats()
+            print(fightResult)
+            let currentWinner = fight.winner
+            if(currentWinner == gameHero.name){
+                //after fight is over & hugie wins, move to next location
+                path.removeFirst()
+                let nextLocation = path.first
+                
+                //find the next location in our loc. list
+                if let foundLocation = locationsList.firstIndex(where: { $0.locationName == nextLocation }) {
+                    //next loc. found, hence update hugie's location
+                    hugieOnMap = locationsList[foundLocation]
+                } else {
+                    //no next loc. found
+                    break LOCATION
+                }
+                isAstridRescued = true
             } else {
-                //no next loc. found
-                break LOCATION
+                isAstridRescued = false
             }
         }
-        
     } else {
       print("> Uh-oh, you don't know Astrid's location yet, select 1 to search for Astrid!")
       printLineSeperator()
