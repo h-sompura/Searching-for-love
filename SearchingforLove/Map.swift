@@ -5,12 +5,12 @@ class Map {
   var placeAstridOnMap: String?
 
   init(locations: [Location], roads: [Road], placeAstrid: String?) {
-    // build the dictionary (db) of roads & which roads they are connected to
+    // build the dictionary (db) of locations & which roads they are connected by
     self.placeAstridOnMap = placeAstrid ?? nil
     for road in roads {
-      // RECALL: Every edge has a source and destination Node
+      // RECALL: Every road has a start and ending location
 
-      // get the value stored in the source
+      // get the value stored in the starting location
       let startingLocation = road.startingLocation
 
       // check if this value is already in our nodes dictionray
@@ -19,7 +19,7 @@ class Map {
         // create a new entry for it
         // (ie: create an empty list)
         adjacencyList[startingLocation] = []
-        // add the destination to to the list
+        // add the ending location to to the list
         // - RECALL: Accessing a value in the dictionary will always return an Optional value
         // - To edit the value of an optional, the optional needs to be unwrapped
         // - the ! symbol means to forcibly unwrap the contents of the variable
@@ -29,47 +29,45 @@ class Map {
         let tupleToAdd = (road.endingLocation, road.roadType)
         adjacencyList[startingLocation]!.append(tupleToAdd)
       } else {
-        // yes, we already have an entry for this node value
-        // directly add the destination to the list
-        // - see previous comments on !
+        // yes, we already have an entry for this location value
+        // directly add the location to the list
         let tupleToAdd = (road.endingLocation, road.roadType)
         adjacencyList[startingLocation]!.append(tupleToAdd)
       }
     }  // end for
 
-    // at this point, the initializer will have finished examining all the edges in the parameter
+    // at this point, the initializer will have finished examining all the roads in the parameter
     print("The map is in your hands!")
   }
 
   func takeJourney(startingLocation: String, endingLocation: String) -> [String] {
-    // 1. Get the current planet that the Ferengi are at
+    // 1. Get the current location that the hero is at
     var currentLocation = startingLocation
     var outputLocation = [startingLocation]
     while currentLocation != endingLocation {
 
-      // 2. What are the planet's neighbours
+      // 2. What are the location's neighbours
       if let neighboursList = adjacencyList[currentLocation] {
         // neighbours exist
-        // 3. Determine which neighbour is the cheapest to fly to
+        // 3. Determine which neighbour is the easiest to travel through
         var nextLocation = neighboursList.first!.locationName
         var easiestRoad = neighboursList.first!.roadType.rawValue
 
-        // find cheapest neighbour
+        // find easiest neighbour
         for neighbour in neighboursList {
           if neighbour.roadType.rawValue < easiestRoad {
             easiestRoad = neighbour.roadType.rawValue
             nextLocation = neighbour.locationName
           }
         }
-        // update the current planet
+        // update the current location
         currentLocation = nextLocation
         outputLocation.append(currentLocation)
         // search complete
         //print("The next location to visit is: \(currentLocation)")
       } else {
         // neighbours do not exist
-        // - you are at a vertex that has no further nodes beyond it
-        // TODO: What will you do next? unsure
+        // - you are at a location that has no further nodes beyond it
       }
 
       // 4. Repeat this process until you reach the end (ending Point)
@@ -79,15 +77,15 @@ class Map {
 
   func searchAstrid(startingLocation: String) -> Bool {
     var astridFound = false
-    //tracks which nodes we need to visit
+    //tracks which locations we need to visit
     var stackToExplore: [String] = []
     let locationOfAstrid = self.placeAstridOnMap
-    // Track which nodes were already visited
+    // Track which locations were already visited
     //  - this is necessary when you aren't sure if your graph has loops / cycles
     var visitedNodes: [String] = []
 
     // indicate where you want to start the traversal from
-    // - depending on the graph and your starting point, you may or may not end up visiting all the nodes
+    // - depending on the map and your starting point, you may or may not end up visiting all the nodes
     stackToExplore.append(startingLocation)
 
     while stackToExplore.isEmpty == false {
@@ -111,7 +109,7 @@ class Map {
         }
       }
       print("> Searching \(currNode): Astrid not found, moving to the next city")
-      // get neighbours of the current node
+      // get neighbours of the current location
       if let neighbours = self.adjacencyList[currNode] {
         //                neighbours = self.adjacencyList[currNode]!
 
