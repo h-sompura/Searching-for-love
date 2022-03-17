@@ -200,7 +200,6 @@ repeat {
         currentWinner = fight.winner
         if currentWinner == gameHero.name {
           //after fight is over & hugie wins, move to next location
-          //THIS IS WRONG: isAstridRescued = true IF WON && NO LOC.
           path.removeFirst()
           let nextLocation = path.first
 
