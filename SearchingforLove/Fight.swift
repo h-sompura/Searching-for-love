@@ -99,7 +99,7 @@ class Fight: CustomStringConvertible {
           "> \(playerHero.name), you were not able to sneak past \(playerMonster.name)")
         print("> *** \(playerMonster.name) gobbled you up! You LOSE *** ")
         self.playerHero.maxHealthPoints = 0
-        isFightOver = true
+        isFightOver = false
       }
     case .runAway:
       print("> *** You gave up on searching for your love! You LOSE *** \n")
