@@ -174,7 +174,7 @@ repeat {
               trackFight = fight.performTurn(kind: .sneak)
               printLineSeperator()
               //print("> In HERO SNEAK: \(trackFight)")
-              if(trackFight) { break FIGHT}
+              if(trackFight) { break LOCATION }
             case 3:
               //run away
               trackFight = fight.performTurn(kind: .runAway)
